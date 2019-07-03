@@ -1,0 +1,105 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Registration</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="separator"></div>
+<div class="row">
+    <div class="container">
+<div class="col-sm-5"></div>
+<div class="col-sm-7 panel panel-info" style="top:100px;right:250px">
+  <h2 class="panel-heading" >Registration</h2>
+  <div th:if="${saveUser eq 'success'}" class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert"
+        aria-hidden="true">&times;</button>
+    <strong>User registered Successfully</strong> Please Login
+  </div>
+  <div th:if="${saveUser eq 'exist-name'}" class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert"
+        aria-hidden="true">&times;</button>
+    <strong>Error!</strong> User name already used !!!
+  </div>
+  <div th:if="${saveUser eq 'exist-email'}" class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert"
+        aria-hidden="true">&times;</button>
+    <strong>Error!</strong> User email already used !!!
+  </div>
+  <div th:if="${saveUser eq 'fail'}" class="alert alert-danger alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert"
+        aria-hidden="true">&times;</button>
+    <strong>Error!</strong> Unexpected error !!!
+  </div>
+  <form class="form-horizontal panel-body" th:action="@{/register}" method="post">
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="username">User Name:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="name" placeholder="User Name" name="name" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="email">Email:</label>
+      <div class="col-sm-9">
+        <input type="email" class="form-control" id="email" placeholder="sample@gmail.com" name="email" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="lastname">Last Name:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lastName" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="pwd">Password:</label>
+      <div class="col-sm-9">          
+        <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="confirm_pwd">Confirm Password:</label>
+      <div class="col-sm-9">          
+        <input type="password" class="form-control" id="confirm_password" placeholder="Confirm password" name="confirm_password" required="required">
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <div class="checkbox col-sm-6">
+          <label><input type="checkbox" name="remember" required="required">Accept Agreement</label>
+        </div>
+        <div class="col-sm-16">
+          <a th:href="@{/login}">Go to Login</a>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">        
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-info">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<script>
+    var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+
+</body>
+</html>
