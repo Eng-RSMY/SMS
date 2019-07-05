@@ -51,12 +51,13 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
         for (GrantedAuthority a : authorities) {
             System.out.println("Authority: " + a.getAuthority());
             roles.add(a.getAuthority());
+            
         }
 
         if (isAdmin(roles)) {
-            return "/secured/hello";
+            return "/admin";
         } else if (isUser(roles)) {
-            return "/hello";
+            return "/home";
         } else {
             return "/login?error";
         }
@@ -80,5 +81,4 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
         return roles.contains("ROLE_ADMIN");
     }
 
-   
 }

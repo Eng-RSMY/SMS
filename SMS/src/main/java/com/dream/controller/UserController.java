@@ -3,8 +3,8 @@ package com.dream.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,13 +37,13 @@ public class UserController {
 		return "login";
 	}
 	
-	//Login
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String getPage(@ModelAttribute User user, Model model){
-		model.addAttribute("user", user);
-		logger.info(user + " Login Successfully..");
-		return "login";
-	}
+	/*
+	 * //Login
+	 * 
+	 * @RequestMapping(value="/login", method=RequestMethod.POST) public String
+	 * getPage(@ModelAttribute User user, Model model){ model.addAttribute("user",
+	 * user); logger.info(user + " Login Successfully.."); return "login"; }
+	 */
 	
 	//Returns register page
 	@GetMapping("/register")
@@ -87,9 +87,21 @@ public class UserController {
 		return "Admin Login";
 	}
 	
-	@GetMapping("/hello")
-	@ResponseBody
-	public String message(){
-		return "Successfully Login";
+	@GetMapping("/home")
+	public String message(Authentication auth){
+		User user = userService.findByName(auth.getName());
+		int user_type = user.getTypeUser();
+		if(user_type == 1) {
+			return "hmhome";
+		}else if(user_type == 2){
+			return "teacher";
+		}else if(user_type == 3) {
+			return "attender";
+		}else if(user_type == 4){
+			return "parent";
+		}else if(user_type == 5) {
+			return "student";
+		}
+		return null;
 	}
 }

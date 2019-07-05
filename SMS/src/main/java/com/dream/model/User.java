@@ -39,7 +39,7 @@ public class User {
 	private int role;
 
 	@Column(name = "type_user")
-	private String typeUser;
+	private int typeUser;
 
 	public User() {
 
@@ -109,12 +109,18 @@ public class User {
 		return this;
 	}
 
-	public String getTypeUser() {
+	public int getTypeUser() {
 		return typeUser;
 	}
 
-	public void setTypeUser(String typeUser) {
+	public void setTypeUser(int typeUser) {
 		this.typeUser = typeUser;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", role=" + role + ", typeUser=" + typeUser + "]";
+	}
+
+	
 }
