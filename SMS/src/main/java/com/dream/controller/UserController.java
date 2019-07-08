@@ -72,7 +72,7 @@ public class UserController {
 
         if (userService.save(reqUser) != null) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
-            logger.info(user + " Save Successfully..");
+            logger.info(reqUser.getName() + " Save Successfully..");
         } else {
         	logger.warn(user + " Not Save Successfully..");
             redirectAttributes.addFlashAttribute("saveUser", "fail");
