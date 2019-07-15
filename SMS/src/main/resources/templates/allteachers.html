@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Teachers</title>
+ <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header-nav"></div>
+  <div class="row">
+    <div class="panel panel-info">
+        <div class="panel-body">
+            <table class="table table-bordered  table-striped table-responsive">
+                <thead>
+                <tr class="btn-info">
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:if="${#lists.isEmpty(userList)}" class="btn-default">
+                    <td colspan="5" align="center">No Record Yet!!!</td>
+                </tr>
+                <tr th:each="users : ${userList}">
+                    <td th:text="${users.name}"></td>
+                    <td th:text="${users.email}"></td>
+                    <td th:text="${users.typeUser}"></td>
+                    <td th:hidden="${users.id}"></td>
+                    <td align="center">
+                        <a th:href="@{/task/edit/{id}(id=${users.id})}">
+                            <span class="glyphicon glyphicon-edit" data-toggle="tooltip"
+                                  data-placement="top" title="Edit Task"></span></a>
+                        &nbsp; &nbsp;
+                        <a data-toggle="modal" data-target="#modal-toTrash"
+                           th:attr="data-target='#modal-toTrash'+${users.id}">
+                            <span class="glyphicon glyphicon-trash" data-toggle="tooltip"
+                                  data-placement="top" title="Sent to Trash Box"></span></a>
+                    </td>
+                    <!--start send to trash modal-->
+                    <div class="modal modal-toTrash" th:id="modal-toTrash+${users.id}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">×
+                                    </button>
+                                    <h3 id="myModalLabel">Delete Confirmation</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="error-text"><strong>Are you sure you want to
+                                        delete this task ?</strong></p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn " data-dismiss="modal" aria-hidden="true">
+                                        Cancel
+                                    </button>
+                                    <a th:href="@{/task/trash/{id}(id=${users.id})}">
+                                        <span class="btn btn-danger" value="delete">Delete</span></a>
+
+                                </div>
+                            </div>
+                            <!-- /.modal-content -->
+                        </div>
+                        <!-- /.modal-dialog -->
+                    </div>
+                    <!--end send to trash modal-->
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+ <footer>
+    <div th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+</footer>
+</body>
+</html>

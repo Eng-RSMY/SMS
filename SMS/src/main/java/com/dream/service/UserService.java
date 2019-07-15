@@ -1,6 +1,6 @@
 package com.dream.service;
 
-import java.util.Collection;
+import java.util.List;
 
 import com.dream.model.User;
 
@@ -23,6 +23,6 @@ public interface UserService {
 	
 	public User findByEmail(String email);
 	
-	public Collection<User> findAll();
+	public List<User> findAll();
 	
 }

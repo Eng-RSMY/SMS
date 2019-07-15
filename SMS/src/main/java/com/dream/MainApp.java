@@ -6,6 +6,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.CrossOrigin;
 /**
  * 
  * @author Dileep
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 
  */
 @SpringBootApplication
+@CrossOrigin("*")
 public class MainApp implements ApplicationRunner{
 
 	private static final Logger logger = LogManager.getLogger(MainApp.class);

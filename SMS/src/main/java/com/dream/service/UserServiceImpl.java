@@ -1,6 +1,7 @@
 package com.dream.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -52,8 +53,8 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByEmail(email);
     }
 
-    public Collection<User> findAll() {
+    public List<User> findAll() {
         Iterable<User> itr = userRepository.findAll();
-        return (Collection<User>) itr;
+        return (List<User>) itr;
     }
 }
