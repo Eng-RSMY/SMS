@@ -1,8 +1,5 @@
 package com.dream.model;
 
-import java.io.Serializable;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,26 +12,20 @@ import javax.persistence.Table;
 /**
  * 
  * @author dileep
- * 
- * 		Teacher model Created by Dileep on 15/07/2019
  *
+ *	Student created by Dileep on 16/07/2019
  */
-
 @Entity
-@Table(name = "teacher")
-public class Teacher implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+@Table(name = "student")
+public class Student {
 
+	int count = 1;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(name = "phone")
-	private String phone;
+	@Column(name = "st_id")
+	private String studentId;
 	
 	@Column(name = "dob")
 	private String dob;
@@ -42,30 +33,33 @@ public class Teacher implements Serializable{
 	@Column(name = "gender")
 	private String gender;
 	
-	@Column(name = "subject")
-	private String subject;
+	@Column(name = "class")
+	private int classOfStudy;
 	
-	@Column(name = "experience")
-	private int experience;
+	@Column(name = "section")
+	private String section;
 	
-	@Column(name = "language")
-	private String language;
-	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@Column(name = "parent_id")
+	private int parentId;
 	
 	@Column(name = "address_id")
 	private int addressId;
 
-	public Teacher() {
+	public Student() {
 		super();
-		// TODO Auto-generated constructor stub
+		this.studentId= "SSSS"+this.count;
+		count++;
 	}
 
-	public Teacher(User user) {
+	public Student(User user) {
 		super();
 		this.user = user;
+		this.studentId= "SSSS"+this.count;
+		count++;
 	}
 
 	public int getId() {
@@ -76,12 +70,12 @@ public class Teacher implements Serializable{
 		this.id = id;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getStudentId() {
+		return studentId;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
 	}
 
 	public String getDob() {
@@ -100,36 +94,36 @@ public class Teacher implements Serializable{
 		this.gender = gender;
 	}
 
-	public String getSubject() {
-		return subject;
+	public int getClassOfStudy() {
+		return classOfStudy;
 	}
 
-	public void setSubject(String subject) {
-		this.subject = subject;
+	public void setClassOfStudy(int classOfStudy) {
+		this.classOfStudy = classOfStudy;
 	}
 
-	public int getExperience() {
-		return experience;
+	public String getSection() {
+		return section;
 	}
 
-	public void setExperience(int experience) {
-		this.experience = experience;
-	}
-
-	public String getLanguage() {
-		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
+	public void setSection(String section) {
+		this.section = section;
 	}
 
 	public User getUser() {
-		return this.user;
+		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public int getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(int parentId) {
+		this.parentId = parentId;
 	}
 
 	public int getAddressId() {
@@ -144,8 +138,8 @@ public class Teacher implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((dob == null) ? 0 : dob.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		return result;
 	}
 
@@ -157,23 +151,22 @@ public class Teacher implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Teacher other = (Teacher) obj;
-		if (id != other.id)
-			return false;
-		if (phone == null) {
-			if (other.phone != null)
+		Student other = (Student) obj;
+		if (dob == null) {
+			if (other.dob != null)
 				return false;
-		} else if (!phone.equals(other.phone))
+		} else if (!dob.equals(other.dob))
+			return false;
+		if (id != other.id)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Teacher [id=" + id + ", phone=" + phone + ", gender=" + gender + ", subject=" + subject
-				+ ", experience=" + experience + "]";
+		return "Student [studentId=" + studentId + ", gender=" + gender + ", classOfStudy=" + classOfStudy
+				+ ", section=" + section + ", addressId=" + addressId + "]";
 	}
 	
 	
-
 }

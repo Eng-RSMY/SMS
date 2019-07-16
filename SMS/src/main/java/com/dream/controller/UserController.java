@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dream.model.User;
+import com.dream.service.TeacherService;
 import com.dream.service.UserService;
 import com.dream.utils.PassEncoding;
 import com.dream.utils.Roles;
@@ -36,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TeacherService teacherService;
 	
 	//Login
 	@GetMapping({"/","/login"})
@@ -78,6 +82,11 @@ public class UserController {
 
         if (userService.save(reqUser) != null) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
+            if(reqUser.getTypeUser() == TypeUser.Teacher.getValue()) {
+            	teacherService.insertTeacher(reqUser);
+            }else if(reqUser.getTypeUser() == TypeUser.Student.getValue()){
+            	
+            }
             logger.info(reqUser.getName() + " Save Successfully..");
         } else {
         	logger.warn(user + " Not Save Successfully..");

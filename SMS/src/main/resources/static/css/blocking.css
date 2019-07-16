@@ -9,3 +9,8 @@ span.block{
     border: 1px solid blue;    
     background-color: lightyellow; 
 }
+
+.user_icon{
+    color: #05b3f7;
+    padding: 0px, 10px,10px.0px;
+}

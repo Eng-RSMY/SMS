@@ -15,32 +15,38 @@
                 <thead>
                 <tr class="btn-info">
                     <th>Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
-                    <th>Type</th>
+                    <th>Subject</th>
+                    <th>Experience</th>
+                    <th>Language</th>
                     <th>Operation</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${#lists.isEmpty(userList)}" class="btn-default">
+                <tr th:if="${#lists.isEmpty(teachers)}" class="btn-default">
                     <td colspan="5" align="center">No Record Yet!!!</td>
                 </tr>
-                <tr th:each="users : ${userList}">
-                    <td th:text="${users.name}"></td>
-                    <td th:text="${users.email}"></td>
-                    <td th:text="${users.typeUser}"></td>
-                    <td th:hidden="${users.id}"></td>
+                <tr th:each="teacher : ${teachers}">
+                    <td th:text="${teacher.user.name+' '+teacher.user.lastName}"></td>
+                    <td th:text="${teacher.phone}"></td>
+                    <td th:text="${teacher.user.email}"></td>
+                    <td th:text="${teacher.subject}"></td>
+                    <td th:text="${teacher.experience}"></td>
+                    <td th:text="${teacher.language}"></td>
+                    <td th:hidden="${teacher.user.id}"></td>
                     <td align="center">
-                        <a th:href="@{/task/edit/{id}(id=${users.id})}">
+                        <a th:href="@{/task/edit/{id}(id=${teacher.user.id})}">
                             <span class="glyphicon glyphicon-edit" data-toggle="tooltip"
                                   data-placement="top" title="Edit Task"></span></a>
                         &nbsp; &nbsp;
                         <a data-toggle="modal" data-target="#modal-toTrash"
-                           th:attr="data-target='#modal-toTrash'+${users.id}">
+                           th:attr="data-target='#modal-toTrash'+${teacher.user.id}">
                             <span class="glyphicon glyphicon-trash" data-toggle="tooltip"
                                   data-placement="top" title="Sent to Trash Box"></span></a>
                     </td>
                     <!--start send to trash modal-->
-                    <div class="modal modal-toTrash" th:id="modal-toTrash+${users.id}">
+                    <div class="modal modal-toTrash" th:id="modal-toTrash+${teacher.user.id}">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -57,7 +63,7 @@
                                     <button class="btn " data-dismiss="modal" aria-hidden="true">
                                         Cancel
                                     </button>
-                                    <a th:href="@{/task/trash/{id}(id=${users.id})}">
+                                    <a th:href="@{/task/trash/{id}(id=${teacher.user.id})}">
                                         <span class="btn btn-danger" value="delete">Delete</span></a>
 
                                 </div>

@@ -1,6 +1,10 @@
 package com.dream.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dream.model.Teacher;
-import com.dream.service.TeacherService;
+import com.dream.service.TeacherServiceImpl;
 
 /**
  * 
@@ -19,7 +23,7 @@ import com.dream.service.TeacherService;
 public class TeacherController {
 	
 	@Autowired
-	private TeacherService teacherService;
+	private TeacherServiceImpl teacherService;
 	
 	@RequestMapping(value = "/teacherDetails/{id}", method = RequestMethod.GET)
 	public String getTeacherDetails(@PathVariable("id") int id, Model model) {
@@ -28,4 +32,10 @@ public class TeacherController {
 		return "";
 	}
 	
+	@RequestMapping(value = "jsonallTeacherslist", method = RequestMethod.GET)
+	public String getAllTeachers(Model model){
+		List<Teacher> list = teacherService.get();
+		model.addAttribute("teachers", list);
+		return "allteachers";
+	}
 }
