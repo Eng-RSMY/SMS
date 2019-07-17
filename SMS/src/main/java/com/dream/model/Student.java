@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 
@@ -19,7 +20,12 @@ import javax.persistence.Table;
 @Table(name = "student")
 public class Student {
 
-	int count = 1;
+	@Transient
+	private int count = 1;
+	
+	@Transient
+	private final String school = "SSSS";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -51,14 +57,14 @@ public class Student {
 
 	public Student() {
 		super();
-		this.studentId= "SSSS"+this.count;
+		this.studentId= school+this.count;
 		count++;
 	}
 
 	public Student(User user) {
 		super();
 		this.user = user;
-		this.studentId= "SSSS"+this.count;
+		this.studentId= school+this.count;
 		count++;
 	}
 
