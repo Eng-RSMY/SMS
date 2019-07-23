@@ -60,26 +60,26 @@ public class UserController {
 	 * user); logger.info(user + " Login Successfully.."); return "login"; }
 	 */
 	
-	//Returns register page
-	@GetMapping("/register")
-	public String hello(){
-		return "register";
+	//Returns register page of Teachers
+	@GetMapping("/teacherRegister")
+	public String registration(){
+		return "teacherRegister";
 	}
 	
-	//It registers the user.
-	@RequestMapping(value="/register", method=RequestMethod.POST)
+	//Returns register page of Students
+	@GetMapping("/studentRegister")
+	public String studentRegistration() {
+		return "studentRegister";
+	}
+	//It registers the Teacher.
+	@RequestMapping(value="/teacherRegister", method=RequestMethod.POST)
 	public String userRegistration(@ModelAttribute User reqUser,@ModelAttribute Teacher teacher,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){
 		User user = userService.findByName(reqUser.getName());
-        if (user != null) {
-            redirectAttributes.addFlashAttribute("saveUser", "exist-name");
-            logger.warn(user.getName() + " Alredy Exits..! ");
-            return "redirect:/register";
-        }
         user = userService.findByEmail(reqUser.getEmail());
         if (user != null) {
             redirectAttributes.addFlashAttribute("saveUser", "exist-email");
             logger.warn(user.getEmail() + " Alredy Exits..! ");
-            return "redirect:/register";
+            return "redirect:/teacherRegister";
         }
 
         reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
@@ -87,20 +87,35 @@ public class UserController {
 
         if (userService.save(reqUser) != null) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
-            if(reqUser.getTypeUser() == TypeUser.Teacher.getValue()) {
             	teacher.setUser(reqUser);
             	teacherService.insertTeacher(teacher);
-            }else if(reqUser.getTypeUser() == TypeUser.Student.getValue()){
-            	student.setUser(reqUser);
-            	studentService.insertStudent(student);
-            }
             logger.info(reqUser.getName() + " Save Successfully..");
         } else {
         	logger.warn(user + " Not Save Successfully..");
             redirectAttributes.addFlashAttribute("saveUser", "fail");
         }
 
-        return "redirect:/register";
+        return "redirect:/teacherRegister";
+	}
+	
+	//Student Registration
+	@RequestMapping(value="/studentRegister", method=RequestMethod.POST)
+	public String studentRegistration(@ModelAttribute User reqUser,@ModelAttribute Teacher teacher,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){
+		User user = userService.findByName(reqUser.getName());
+        reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
+        reqUser.setRole(Roles.ROLE_USER.getValue());
+
+        if (userService.save(reqUser) != null) {
+            redirectAttributes.addFlashAttribute("saveUser", "success");
+            student.setUser(reqUser);
+            studentService.insertStudent(student);
+            logger.info(reqUser.getName() + " Save Successfully..");
+        } else {
+        	logger.warn(user + " Not Save Successfully..");
+            redirectAttributes.addFlashAttribute("saveUser", "fail");
+        }
+
+        return "redirect:/studentRegister";
 	}
 	
 	@GetMapping("/secured/hello")

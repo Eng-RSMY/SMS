@@ -3,101 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <title>Students</title>
- <div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/header :: header"></div>
 </head>
 <body>
-<div th:replace="fragments/header :: header-nav"></div>
-<a th:href="@{/register}"><input type="submit" value="Add" class="btn btn-success btn-custom" /></a>
-  <div class="row">
-    <div class="panel panel-info">
-        <div class="panel-body">
-            <table class="table table-bordered  table-striped table-responsive">
-                <thead>
-                <tr class="btn-info">
-                    <th>Name</th>
-                    <th>Student Id</th>
-                    <th>Date Of Birth</th>
-                    <th>Email</th>
-                    <th>Class</th>
-                    <th>Section</th>
-                    <th>Operation</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${page.getTotalElements()<=0}" class="btn-default">
-                    <td colspan="8" align="center">No Record Yet!!!</td>
-                </tr>
-                <tr th:each="student : ${page.content}">
-                    <td th:text="${student.user.name+' '+student.user.lastName}"></td>
-                    <td th:text="${student.studentId}"></td>
-                    <td th:text="${student.dob}"></td>
-                    <td th:text="${student.user.email}"></td>
-                    <td th:text="${student.classOfStudy}"></td>
-                    <td th:text="${student.section}"></td>
-                    <td th:hidden="${student.user.id}"></td>
-                    <td align="center">
-                        <a th:href="@{/task/edit/{id}(id=${student.user.id})}">
-                            <span class="glyphicon glyphicon-edit" data-toggle="tooltip"
-                                  data-placement="top" title="Edit Task"></span></a>
-                        &nbsp; &nbsp;
-                        <a data-toggle="modal" data-target="#modal-toTrash"
-                           th:attr="data-target='#modal-toTrash'+${student.user.id}">
-                            <span class="glyphicon glyphicon-trash" data-toggle="tooltip"
-                                  data-placement="top" title="Sent to Trash Box"></span></a>
-                    </td>
-                    <!--start send to trash modal-->
-                    <div class="modal modal-toTrash" th:id="modal-toTrash+${student.user.id}">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal"
-                                            aria-hidden="true">×
-                                    </button>
-                                    <h3 id="myModalLabel">Delete Confirmation</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <p class="error-text"><strong>Are you sure you want to
-                                        delete this task ?</strong></p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn " data-dismiss="modal" aria-hidden="true">
-                                        Cancel
-                                    </button>
-                                    <a th:href="@{/task/trash/{id}(id=${student.user.id})}">
-                                        <span class="btn btn-danger" value="delete">Delete</span></a>
+	<div th:replace="fragments/header :: header-nav"></div>
+	<a th:href="@{/studentRegister}"><input type="submit" value="Add"
+		class="btn btn-success btn-custom" /></a>
+	<div class="row">
+		<div class="panel panel-info">
+			<div class="panel-body">
+				<table class="table table-bordered  table-striped table-responsive">
+					<thead>
+						<tr class="btn-info">
+							<th>Name</th>
+							<th>Student Id</th>
+							<th>Date Of Birth</th>
+							<th>Email</th>
+							<th>Class</th>
+							<th>Section</th>
+							<th>Operation</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${page.getTotalElements()<=0}" class="btn-default">
+							<td colspan="8" align="center">No Record Yet!!!</td>
+						</tr>
+						<tr th:each="student : ${page.content}">
+							<td th:text="${student.user.name+' '+student.user.lastName}"></td>
+							<td th:text="${student.studentId}"></td>
+							<td th:text="${student.dob}"></td>
+							<td th:text="${student.user.email}"></td>
+							<td th:text="${student.classOfStudy+'th Class'}"></td>
+							<td th:text="${student.section+' Section'}"></td>
+							<td th:hidden="${student.user.id}"></td>
+							<td align="center"><a
+								th:href="@{/task/edit/{id}(id=${student.user.id})}"> <span
+									class="glyphicon glyphicon-edit" data-toggle="tooltip"
+									data-placement="top" title="Edit Task"></span></a> &nbsp; &nbsp; <a
+								data-toggle="modal" data-target="#modal-toTrash"
+								th:attr="data-target='#modal-toTrash'+${student.user.id}"> <span
+									class="glyphicon glyphicon-trash" data-toggle="tooltip"
+									data-placement="top" title="Sent to Trash Box"></span></a></td>
+							<!--start send to trash modal-->
+							<div class="modal modal-toTrash"
+								th:id="modal-toTrash+${student.user.id}">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-hidden="true">×</button>
+											<h3 id="myModalLabel">Delete Confirmation</h3>
+										</div>
+										<div class="modal-body">
+											<p class="error-text">
+												<strong>Are you sure you want to delete this task ?</strong>
+											</p>
+										</div>
+										<div class="modal-footer">
+											<button class="btn " data-dismiss="modal" aria-hidden="true">
+												Cancel</button>
+											<a th:href="@{/task/trash/{id}(id=${student.user.id})}">
+												<span class="btn btn-danger" value="delete">Delete</span>
+											</a>
 
-                                </div>
-                            </div>
-                            <!-- /.modal-content -->
-                        </div>
-                        <!-- /.modal-dialog -->
-                    </div>
-                    <!--end send to trash modal-->
-                </tr>
+										</div>
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal-dialog -->
+							</div>
+							<!--end send to trash modal-->
+						</tr>
 
-                </tbody>
-            </table>
-        </div>
+					</tbody>
+				</table>
+				<!-- Pagination Starting-->
+				<div class="pagination-div">
+					<span th:if="${page.hasPrevious()}"> <a
+						th:href="@{/allStudents(page=${page.number-1},size=${page.size})}">Previous</a>
+					</span>
+					<th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+						<span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
+						<span th:unless="${page.number == i}"> <a
+							th:href="@{/allStudents(page=${i},size=${page.size})}">[[${i}+1]]</a>
+						</span>
+					</th:block>
+					<span th:if="${page.hasNext()}"> <a
+						th:href="@{/allStudents(page=${page.number+1},size=${page.size})}">Next</a>
+					</span>
+				</div>
+				<!-- Pagination Ending -->
+			</div>
 
-    </div>
+		</div>
 
-</div>
-<div class="pagination-div">
-    <span th:if="${page.hasPrevious()}">
-        <a th:href="@{/allStudents(page=${page.number-1},size=${page.size})}">Previous</a>
-    </span>
-    <th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
-        <span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
-        <span th:unless="${page.number == i}">
-             <a th:href="@{/allStudents(page=${i},size=${page.size})}">[[${i}+1]]</a>
-        </span>
-    </th:block>
-    <span th:if="${page.hasNext()}">
-        <a th:href="@{/allStudents(page=${page.number+1},size=${page.size})}">Next</a>
-    </span>
-</div>
- <footer>
-    <div th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
-</footer>
+	</div>
+
+	<footer>
+		<div th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+	</footer>
 </body>
 </html>

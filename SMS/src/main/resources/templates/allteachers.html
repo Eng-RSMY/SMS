@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header-nav"></div>
-<a th:href="@{/register}"><input type="submit" value="Add" class="btn btn-success btn-custom" /></a>
+<a th:href="@{/teacherRegister}"><input type="submit" value="Add" class="btn btn-success btn-custom" /></a>
   <div class="row">
     <div class="panel panel-info">
         <div class="panel-body">
@@ -32,7 +32,7 @@
                     <td th:text="${teacher.phone}"></td>
                     <td th:text="${teacher.user.email}"></td>
                     <td th:text="${teacher.subject}"></td>
-                    <td th:text="${teacher.experience}"></td>
+                    <td th:text="${teacher.experience+' Years'}"></td>
                     <td th:text="${teacher.language}"></td>
                     <td th:hidden="${teacher.user.id}"></td>
                     <td align="center">

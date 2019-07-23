@@ -74,4 +74,7 @@ span.block{
     padding-top: 5% !important;
 
 }
-
+.pagination-div{user-select: none;}
+.pagination-div span{border-radius:3px;border:1px solid #999;
+   padding:5px;margin:10px 0px 0px 10px;display:inline-block}
+span.selected{background:#ccf;}

@@ -10,7 +10,7 @@
 <div class="row">
     <div class="container">
 <div class="col-sm-5"></div>
-<div class="col-sm-7 panel panel-info" style="top:100px;right:250px">
+<div class="col-sm-7 panel panel-info" style="right:250px">
   <h2 class="panel-heading" >Registration</h2>
   <div th:if="${saveUser eq 'success'}" class="alert alert-success alert-dismissable">
     <button type="button" class="close" data-dismiss="alert"
@@ -32,7 +32,7 @@
         aria-hidden="true">&times;</button>
     <strong>Error!</strong> Unexpected error !!!
   </div>
-  <form class="form-horizontal panel-body" th:action="@{/register}" method="post">
+  <form class="form-horizontal panel-body" th:action="@{/studentRegister}" method="post">
     <div class="form-group">
       <label class="control-label col-sm-3" for="username">User Name:</label>
       <div class="col-sm-9">
@@ -40,15 +40,56 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="control-label col-sm-3" for="email">Email:</label>
-      <div class="col-sm-9">
-        <input type="email" class="form-control" id="email" placeholder="sample@gmail.com" name="email" required="required">
-      </div>
-    </div>
-    <div class="form-group">
       <label class="control-label col-sm-3" for="lastname">Last Name:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lastName" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="gender">Gender:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="gender" id="gender" required="required">
+          <option value="" disabled selected>Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="dob">Date Of Birth:</label>
+      <div class="col-sm-9">
+        <input type="date" class="form-control" id="dob" name="dob" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="classOfStudy">Class:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="classOfStudy" id="classOfStudy" required="required">
+          <option value="" disabled selected>Select</option>
+          <option value="1">I Class</option>
+          <option value="2">II Class</option>
+          <option value="3">III Class</option>
+          <option value="4">IV Class</option>
+          <option value="5">V Class</option>
+          <option value="6">VI Class</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="section">Section:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="section" id="section" required="required">
+          <option value="" disabled selected>Select</option>
+          <option value="A">A Section</option>
+          <option value="B">B Section</option>
+          <option value="C">C Section</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="email">Email:</label>
+      <div class="col-sm-9">
+        <input type="email" class="form-control" id="email" placeholder="sample@gmail.com(Optional)" name="email">
       </div>
     </div>
     <div class="form-group">
@@ -63,43 +104,35 @@
         <input type="password" class="form-control" id="confirm_password" placeholder="Confirm password" name="confirm_password" required="required">
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="display:none;">
         <label class="control-label col-sm-3" for="typeUser">User Type:</label>
         <div class="col-sm-9">
       <select class="form-control" name="typeUser" id="typeUser" required="required">
-          <option value="" disabled selected>Select</option>
+          <option value="" disabled >Select</option>
           <option value="1">HM</option>
           <option value="2">Teacher</option>
           <option value="3">Attender</option>
           <option value="4">Parent</option>
-          <option value="5">Student</option>
+          <option value="5" selected>Student</option>
       </select>
       </div>
     </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-10">
-        <div class="checkbox col-sm-6">
-          <label><input type="checkbox" name="remember" required="required">Accept Agreement</label>
-        </div>
-        <div class="col-sm-16">
-          <a th:href="@{/login}">Go to Login</a>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">        
-      <div class="col-sm-offset-2 col-sm-6">
+    <div class="form-group">
+    <div class="col-sm-6" style="position: absolute;right: 200px">  
+      <div class=" col-sm-3">
         <button type="submit" class="btn btn-success">Submit</button>
       </div>
-       <div class="col-sm-offset-2 col-sm-6">
-        <a th:href="@{/allTeachers}"><button type="button" class="btn btn-warning">Cancel</button></a>
+       <div class=" col-sm-3">
+        <a th:href="@{/allStudents}"><button type="button" class="btn btn-warning">Cancel</button></a>
       </div>
+    </div>
     </div>
   </form>
 </div>
 </div>
 </div>
  <footer>
-    <div th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+    <div class="separator" th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
 </footer>
 <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
