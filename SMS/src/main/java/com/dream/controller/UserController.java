@@ -124,7 +124,7 @@ public class UserController {
 	@GetMapping("/home")
 	public String message(Authentication auth, Model m){
 		User user = userService.findByName(auth.getName());
-		int user_type = user.getUserType();
+		int user_type = user.getRole();
 		if(user_type == Roles.HM.getValue()) {
 			return "hmhome";
 		}else if(user_type == Roles.Teacher.getValue()){
@@ -145,7 +145,7 @@ public class UserController {
 	public String getAllTeachersList(Model model) {
 		List<User> list = userService.findAll()
 				.stream()
-				.filter(l -> l.getUserType()==Roles.Teacher.getValue())
+				.filter(l -> l.getRole()==Roles.Teacher.getValue())
 				.collect(Collectors.toList());
 		model.addAttribute("userList", list);
 		return "allteachers";

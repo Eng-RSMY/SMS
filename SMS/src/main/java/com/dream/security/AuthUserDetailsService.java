@@ -48,7 +48,7 @@ public class AuthUserDetailsService implements UserDetailsService {
                     accountNonExpired,
                     credentialsNonExpired,
                     accountNonLocked,
-                    getAuthorities(user.getUserType())
+                    getAuthorities(user.getRole())
             );
             return springUser;
         } else {
