@@ -29,6 +29,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private MyAuthenticationSuccessHandler successHandler;
 
+    @Autowired
+    private MyLogoutSuccessHandler logoutSuccessHandler;
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -67,7 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(successHandler)
                 .usernameParameter("name").passwordParameter("password")
                 .and()
-                .logout().permitAll().and().exceptionHandling().accessDeniedPage("/login");
+                .logout().logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler).permitAll().and().exceptionHandling().accessDeniedPage("/login");
     }
 
     @Override

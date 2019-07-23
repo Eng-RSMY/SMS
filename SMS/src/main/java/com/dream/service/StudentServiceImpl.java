@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.Student;
@@ -47,9 +49,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getPaginated() {
-		// TODO Auto-generated method stub
-		return null;
+	public Page<Student> getPaginated(Pageable pageable) {
+		return studentRepo.findAll(pageable);
 	}
 
 }

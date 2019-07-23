@@ -32,7 +32,7 @@ public class TeacherController {
 		return "";
 	}
 	
-	@RequestMapping(value = "jsonallTeacherslist", method = RequestMethod.GET)
+	@RequestMapping(value = "/allTeachers", method = RequestMethod.GET)
 	public String getAllTeachers(Model model){
 		List<Teacher> list = teacherService.get();
 		model.addAttribute("teachers", list);

@@ -3,6 +3,9 @@ package com.dream.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +31,15 @@ public class StudentController {
 	@RequestMapping(value = "studentList", method = RequestMethod.GET)
 	public String getAllTeachers(Model model){
 		List<Student> list = studentService.get();
-		model.addAttribute("teachers", list);
-		return "allstudents";
+		model.addAttribute("students", list);
+		return "allStudents";
 	}
 	
+	@RequestMapping(value = "/allStudents", method = RequestMethod.GET)
+	public String getAllStudents(@PageableDefault(size = 5) Pageable pageable, Model model) {
+		Page<Student> page = studentService.getPaginated(pageable);
+		model.addAttribute("page", page);
+		System.out.println(page.getTotalElements());
+		return "allStudents";
+	}
 }
