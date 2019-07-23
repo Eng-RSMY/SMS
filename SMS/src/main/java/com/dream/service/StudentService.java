@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.dream.model.Student;
-import com.dream.model.User;
 /**
  * 
  * @author dileep
@@ -15,7 +14,7 @@ import com.dream.model.User;
  */
 public interface StudentService {
 
-	public boolean insertStudent(User user);
+	public boolean insertStudent(Student student);
 
 	public Student getStudentById(int user_id);
 	

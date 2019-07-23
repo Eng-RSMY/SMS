@@ -3,7 +3,6 @@ package com.dream.service;
 import java.util.List;
 
 import com.dream.model.Teacher;
-import com.dream.model.User;
 /**
  * 
  * @author dileep
@@ -13,7 +12,7 @@ import com.dream.model.User;
  */
 public interface TeacherService {
 	
-	public boolean insertTeacher(User user);
+	public boolean insertTeacher(Teacher teacher);
 
 	public Teacher getTeacherById(int user_id);
 	

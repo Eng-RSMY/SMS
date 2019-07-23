@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.Student;
-import com.dream.model.User;
 import com.dream.repository.StudentRepository;
 /**
  * 
@@ -24,8 +23,8 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepository studentRepo;
 	
 	@Override
-	public boolean insertStudent(User user) {
-		studentRepo.save(new Student(user));
+	public boolean insertStudent(Student student) {
+		studentRepo.save(student);
 		return false;
 	}
 

@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dream.model.Student;
+import com.dream.model.Teacher;
 import com.dream.model.User;
+import com.dream.service.StudentService;
 import com.dream.service.TeacherService;
 import com.dream.service.UserService;
 import com.dream.utils.PassEncoding;
@@ -40,6 +43,9 @@ public class UserController {
 	@Autowired
 	private TeacherService teacherService;
 	
+	@Autowired
+	private StudentService studentService;
+	
 	//Login
 	@GetMapping({"/","/login"})
 	public String login(){
@@ -62,7 +68,7 @@ public class UserController {
 	
 	//It registers the user.
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String userRegistration(@ModelAttribute User reqUser, final RedirectAttributes redirectAttributes){
+	public String userRegistration(@ModelAttribute User reqUser,@ModelAttribute Teacher teacher,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){
 		User user = userService.findByName(reqUser.getName());
         if (user != null) {
             redirectAttributes.addFlashAttribute("saveUser", "exist-name");
@@ -82,9 +88,11 @@ public class UserController {
         if (userService.save(reqUser) != null) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
             if(reqUser.getTypeUser() == TypeUser.Teacher.getValue()) {
-            	teacherService.insertTeacher(reqUser);
+            	teacher.setUser(reqUser);
+            	teacherService.insertTeacher(teacher);
             }else if(reqUser.getTypeUser() == TypeUser.Student.getValue()){
-            	
+            	student.setUser(reqUser);
+            	studentService.insertStudent(student);
             }
             logger.info(reqUser.getName() + " Save Successfully..");
         } else {

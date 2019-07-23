@@ -42,8 +42,8 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	@Override
-	public boolean insertTeacher(User user) {
-		teacherRepo.save(new Teacher(user));
+	public boolean insertTeacher(Teacher teacher) {
+		teacherRepo.save(teacher);
 		return true;
 	}
 	

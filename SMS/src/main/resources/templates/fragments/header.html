@@ -26,7 +26,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="#"><span class="glyphicon glyphicon-lock"> ChangePassword</span></a></li>
                   <li class="divider"></li>
-                  <li><form action="@{/logout}" method="post"><a href="#" onclick="$(this).closest('form').submit()"><span class=" glyphicon glyphicon-off"> Logout</span></a></form></li>
+                  <li><form th:action="@{/logout}" method="post"><a href="javascript:;" onclick="$(this).closest('form').submit()"><span class=" glyphicon glyphicon-off"> Logout</span></a></form></li>
                 </ul>
               </div></li>
             </ul>
