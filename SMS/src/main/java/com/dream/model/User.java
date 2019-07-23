@@ -35,11 +35,8 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name = "role")
-	private int role;
-
 	@Column(name = "type_user")
-	private int typeUser;
+	private int userType;
 
 	public User() {
 
@@ -51,8 +48,7 @@ public class User {
 		this.email = user.email;
 		this.lastName = user.name;
 		this.password = user.password;
-		this.role = user.role;
-		this.typeUser = user.typeUser;
+		this.userType = user.userType;
 	}
 
 	public int getId() {
@@ -100,26 +96,17 @@ public class User {
 		return this;
 	}
 
-	public int getRole() {
-		return role;
+	public int getUserType() {
+		return userType;
 	}
 
-	public User setRole(int roles) {
-		this.role = roles;
-		return this;
-	}
-
-	public int getTypeUser() {
-		return typeUser;
-	}
-
-	public void setTypeUser(int typeUser) {
-		this.typeUser = typeUser;
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", role=" + role + ", typeUser=" + typeUser + "]";
+		return "User [id=" + id + ", name=" + name + ", typeUser=" + userType + "]";
 	}
 
 	

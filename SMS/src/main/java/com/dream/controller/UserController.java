@@ -24,7 +24,6 @@ import com.dream.service.TeacherService;
 import com.dream.service.UserService;
 import com.dream.utils.PassEncoding;
 import com.dream.utils.Roles;
-import com.dream.utils.TypeUser;
 
 /**
  * User controller Created by Dileep on 16/05/2019
@@ -83,7 +82,6 @@ public class UserController {
         }
 
         reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
-        reqUser.setRole(Roles.ROLE_USER.getValue());
 
         if (userService.save(reqUser) != null) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
@@ -103,7 +101,6 @@ public class UserController {
 	public String studentRegistration(@ModelAttribute User reqUser,@ModelAttribute Teacher teacher,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){
 		User user = userService.findByName(reqUser.getName());
         reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
-        reqUser.setRole(Roles.ROLE_USER.getValue());
 
         if (userService.save(reqUser) != null) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
@@ -127,18 +124,18 @@ public class UserController {
 	@GetMapping("/home")
 	public String message(Authentication auth, Model m){
 		User user = userService.findByName(auth.getName());
-		int user_type = user.getTypeUser();
-		if(user_type == TypeUser.HM.getValue()) {
+		int user_type = user.getUserType();
+		if(user_type == Roles.HM.getValue()) {
 			return "hmhome";
-		}else if(user_type == TypeUser.Teacher.getValue()){
+		}else if(user_type == Roles.Teacher.getValue()){
 			List<User> list = userService.findAll();
 			m.addAttribute("userList", list);
 			return "teacher";
-		}else if(user_type == TypeUser.Attender.getValue()) {
+		}else if(user_type == Roles.Attender.getValue()) {
 			return "attender";
-		}else if(user_type == TypeUser.Parent.getValue()){
+		}else if(user_type == Roles.Parent.getValue()){
 			return "parent";
-		}else if(user_type == TypeUser.Student.getValue()) {
+		}else if(user_type == Roles.Student.getValue()) {
 			return "student";
 		}
 		return null;
@@ -148,7 +145,7 @@ public class UserController {
 	public String getAllTeachersList(Model model) {
 		List<User> list = userService.findAll()
 				.stream()
-				.filter(l -> l.getTypeUser()==TypeUser.Teacher.getValue())
+				.filter(l -> l.getUserType()==Roles.Teacher.getValue())
 				.collect(Collectors.toList());
 		model.addAttribute("userList", list);
 		return "allteachers";

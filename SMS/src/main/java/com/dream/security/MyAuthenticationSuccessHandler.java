@@ -47,16 +47,16 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
     protected String determineTargetUrl(Authentication authentication) {
         logger.info("determineTargetUrl: " + authentication.getName());
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        List<String> roles = new ArrayList<>();
+        List<String> users = new ArrayList<>();
         for (GrantedAuthority a : authorities) {
             System.out.println("Authority: " + a.getAuthority());
-            roles.add(a.getAuthority());
+            users.add(a.getAuthority());
             
         }
 
-        if (isAdmin(roles)) {
+        if (isAdminOrHM(users)) {
             return "/admin";
-        } else if (isUser(roles)) {
+        } else if (isAttender(users) || isTeacher(users) || isParent(users) || isStudent(users)) {
             return "/home";
         } else {
             return "/login?error";
@@ -73,12 +73,24 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
         return redirectStrategy;
     }
 
-    private boolean isUser(List<String> roles) {
-        return roles.contains("ROLE_USER");
+    private boolean isAdminOrHM(List<String> users) {
+        return users.contains("HM");
     }
 
-    private boolean isAdmin(List<String> roles) {
-        return roles.contains("ROLE_ADMIN");
+    private boolean isTeacher(List<String> users) {
+        return users.contains("Teacher");
+    }
+    
+    private boolean isAttender(List<String> users) {
+        return users.contains("Attender");
+    }
+
+    private boolean isParent(List<String> users) {
+        return users.contains("Parent");
+    }
+    
+    private boolean isStudent(List<String> users) {
+        return users.contains("Student");
     }
 
 }

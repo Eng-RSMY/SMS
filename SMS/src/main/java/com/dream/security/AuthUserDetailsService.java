@@ -48,7 +48,7 @@ public class AuthUserDetailsService implements UserDetailsService {
                     accountNonExpired,
                     credentialsNonExpired,
                     accountNonLocked,
-                    getAuthorities(user.getRole())
+                    getAuthorities(user.getUserType())
             );
             return springUser;
         } else {
@@ -73,11 +73,16 @@ public class AuthUserDetailsService implements UserDetailsService {
 
         List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>();
         if (role == 1) {
-            authList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+            authList.add(new SimpleGrantedAuthority("HM"));
         } else if (role == 2) {
-            authList.add(new SimpleGrantedAuthority("ROLE_USER"));
+            authList.add(new SimpleGrantedAuthority("Teacher"));
+        }else if (role == 3) {
+            authList.add(new SimpleGrantedAuthority("Attender"));
+        }else if (role == 4) {
+            authList.add(new SimpleGrantedAuthority("Parent"));
+        }else if (role == 5) {
+            authList.add(new SimpleGrantedAuthority("Student"));
         }
-
         return authList;
     }
 
