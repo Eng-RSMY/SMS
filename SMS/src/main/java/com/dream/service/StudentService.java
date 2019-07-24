@@ -16,7 +16,7 @@ public interface StudentService {
 
 	public boolean insertStudent(Student student);
 
-	public Student getStudentById(int user_id);
+	public Student getStudentById(int id);
 	
 	public List<Student> getAllTeachers();
 	

@@ -35,18 +35,18 @@
 							<td th:text="${student.user.email}"></td>
 							<td th:text="${student.classOfStudy+'th Class'}"></td>
 							<td th:text="${student.section+' Section'}"></td>
-							<td th:hidden="${student.user.id}"></td>
+							<td th:hidden="${student.id}"></td>
 							<td align="center"><a
-								th:href="@{/task/edit/{id}(id=${student.user.id})}"> <span
+								th:href="@{/studentDetails/{id}(id=${student.id})}"> <span
 									class="glyphicon glyphicon-edit" data-toggle="tooltip"
 									data-placement="top" title="Edit Task"></span></a> &nbsp; &nbsp; <a
 								data-toggle="modal" data-target="#modal-toTrash"
-								th:attr="data-target='#modal-toTrash'+${student.user.id}"> <span
+								th:attr="data-target='#modal-toTrash'+${student.id}"> <span
 									class="glyphicon glyphicon-trash" data-toggle="tooltip"
 									data-placement="top" title="Sent to Trash Box"></span></a></td>
 							<!--start send to trash modal-->
 							<div class="modal modal-toTrash"
-								th:id="modal-toTrash+${student.user.id}">
+								th:id="modal-toTrash+${student.id}">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -62,7 +62,7 @@
 										<div class="modal-footer">
 											<button class="btn " data-dismiss="modal" aria-hidden="true">
 												Cancel</button>
-											<a th:href="@{/task/trash/{id}(id=${student.user.id})}">
+											<a th:href="@{/task/trash/{id}(id=${student.id})}">
 												<span class="btn btn-danger" value="delete">Delete</span>
 											</a>
 

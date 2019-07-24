@@ -72,72 +72,81 @@ public class Student {
 		return id;
 	}
 
-	public void setId(int id) {
+	public Student setId(int id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getStudentId() {
 		return studentId;
 	}
 
-	public void setStudentId(String studentId) {
+	public Student setStudentId(String studentId) {
 		this.studentId = studentId;
+		return this;
 	}
 
 	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public Student setDob(String dob) {
 		this.dob = dob;
+		return this;
 	}
 
 	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public Student setGender(String gender) {
 		this.gender = gender;
+		return this;
 	}
 
 	public int getClassOfStudy() {
 		return classOfStudy;
 	}
 
-	public void setClassOfStudy(int classOfStudy) {
+	public Student setClassOfStudy(int classOfStudy) {
 		this.classOfStudy = classOfStudy;
+		return this;
 	}
 
 	public String getSection() {
 		return section;
 	}
 
-	public void setSection(String section) {
+	public Student setSection(String section) {
 		this.section = section;
+		return this;
 	}
 
 	public User getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public Student setUser(User user) {
 		this.user = user;
+		return this;
 	}
 
 	public int getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(int parentId) {
+	public Student setParentId(int parentId) {
 		this.parentId = parentId;
+		return this;
 	}
 
 	public int getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(int addressId) {
+	public Student setAddressId(int addressId) {
 		this.addressId = addressId;
+		return this;
 	}
 
 	@Override
