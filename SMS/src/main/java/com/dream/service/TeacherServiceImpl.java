@@ -23,8 +23,8 @@ public class TeacherServiceImpl implements TeacherService{
 	private TeacherRepository teacherRepo;
 	
 	@Override
-	public Teacher getTeacherById(int user_id) {
-		Teacher teacher = teacherRepo.findByUserOn(user_id);
+	public Teacher getTeacherById(int id) {
+		Teacher teacher = teacherRepo.findById(id);
 		return teacher;
 	}
 

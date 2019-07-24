@@ -23,4 +23,5 @@ public interface TeacherRepository extends CrudRepository<Teacher,Integer>{
 	@Query(value = "select u.name,u.last_name,t.phone,t.subject,t.experience from user u JOIN teacher t ON u.user_id=t.user_id and where user_id=:id", nativeQuery = true)
 	Teacher findByUserOn(@Param("id") int id);
 	
+	Teacher findById(int id);
 }

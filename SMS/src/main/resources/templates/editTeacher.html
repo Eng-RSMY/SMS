@@ -1,0 +1,149 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit</title>
+  <meta charset="utf-8">
+  <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: header-nav"></div>
+<div class="separator"></div>
+<div class="row">
+    <div class="container">
+<div class="col-sm-5"></div>
+<div class="col-sm-7 panel panel-info" style="right:250px">
+  <h2 class="panel-heading" >Edit Teacher</h2>
+	<div th:if="${msg eq 'success'}" class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times; </button>
+        <strong>Success </strong> Teacher Details updated
+    </div>
+    <div th:if="${msg eq 'same'}" class="alert alert-warning alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         <strong>Warning !!! </strong> Please update at least one filed
+    </div>
+    <div th:if="${msg eq 'fail'}" class="alert alert-danger alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         <strong>Error !!!  </strong> Unexpected error occurred. Please try later.
+    </div>
+  <form class="form-horizontal panel-body" th:object="${teacher}" th:action="@{/editTeacher}" method="post">
+  		<input type="hidden" th:field="*{id}" th:value="*{id}"/>
+  		<input type="hidden" th:field="*{user.id}" th:value="*{user.id}"/>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="username">User Name:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="name" placeholder="User Name" th:value="*{user.name}" name="name" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="lastName">Last Name:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="lname" placeholder="Last Name" name="lastName" th:value="*{user.lastName}" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="gender">Gender:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="gender" id="gender" th:field="*{gender}" required="required">
+          <option value="" disabled selected>Select</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="dob">Date Of Birth:</label>
+      <div class="col-sm-9">
+        <input type="date" class="form-control" id="dob" name="dob" th:value="*{dob}" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="subject">Subject:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="subject" id="subject" th:field="*{subject}" required="required">
+          <option value="" disabled selected>Select</option>
+          <option value="Telugu">Telugu</option>
+          <option value="Hindi">Hindi</option>
+          <option value="English">English</option>
+          <option value="Maths">Maths</option>
+          <option value="Science">Science</option>
+          <option value="Social">Social</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="experience">Experience:</label>
+      <div class="col-sm-9">
+        <input type="number" class="form-control" id="experience" name="experience" th:value="*{experience}" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="language">Language:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="language" id="language" th:field="*{language}" required="required">
+          <option value="" disabled selected>Select</option>
+          <option value="Telugu">Male</option>
+          <option value="Hindi">Hindi</option>
+          <option value="English">English</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="phone">Phone:</label>
+      <div class="col-sm-9">
+        <input type="phone" class="form-control" id="phone" placeholder="7788996654" name="phone" th:value="*{phone}" required="required">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="email">Email:</label>
+      <div class="col-sm-9">
+        <input type="email" class="form-control" id="email" placeholder="sample@gmail.com" name="email" th:value="*{user.email}" required="required">
+      </div>
+    </div>
+    <div class="form-group" style="display:none;">
+        <label class="control-label col-sm-3" for="typeUser">User Type:</label>
+        <div class="col-sm-9">
+      <select class="form-control" name="typeUser" id="typeUser" required="required">
+          <option value="" disabled>Select</option>
+          <option value="1">HM</option>
+          <option value="2" selected>Teacher</option>
+          <option value="3">Attender</option>
+          <option value="4">Parent</option>
+          <option value="5">Student</option>
+      </select>
+      </div>
+    </div>
+    <div class="form-group"> 
+    <div class="col-sm-6" style="position: absolute;right: 200px">       
+      <div class=" col-sm-3">
+        <button type="submit" class="btn btn-success">Update</button>
+      </div>
+       <div class=" col-sm-3">
+        <a th:href="@{/allTeachers}"><button type="button" class="btn btn-warning">Cancel</button></a>
+      </div>
+    </div>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+ <footer>
+    <div class="separator" th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+</footer>
+<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+<script>
+    var password = document.getElementById("password")
+            , confirm_password = document.getElementById("confirm_password");
+
+    function validatePassword() {
+        if (password.value != confirm_password.value) {
+            confirm_password.setCustomValidity("Passwords Don't Match");
+        } else {
+            confirm_password.setCustomValidity('');
+        }
+    }
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
+
+</body>
+</html>

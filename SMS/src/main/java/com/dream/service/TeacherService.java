@@ -14,7 +14,7 @@ public interface TeacherService {
 	
 	public boolean insertTeacher(Teacher teacher);
 
-	public Teacher getTeacherById(int user_id);
+	public Teacher getTeacherById(int id);
 	
 	public List<Teacher> getAllTeachers();
 	

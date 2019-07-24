@@ -100,8 +100,9 @@ public class User {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public User setRole(int role) {
 		this.role = role;
+		return this;
 	}
 
 	@Override

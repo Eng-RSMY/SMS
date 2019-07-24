@@ -60,7 +60,6 @@ public class Teacher implements Serializable{
 
 	public Teacher() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Teacher(User user) {
@@ -72,72 +71,81 @@ public class Teacher implements Serializable{
 		return id;
 	}
 
-	public void setId(int id) {
+	public Teacher setId(int id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public Teacher setPhone(String phone) {
 		this.phone = phone;
+		return this;
 	}
 
 	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(String dob) {
+	public Teacher setDob(String dob) {
 		this.dob = dob;
+		return this;
 	}
 
 	public String getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public Teacher setGender(String gender) {
 		this.gender = gender;
+		return this;
 	}
 
 	public String getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public Teacher setSubject(String subject) {
 		this.subject = subject;
+		return this;
 	}
 
 	public int getExperience() {
 		return experience;
 	}
 
-	public void setExperience(int experience) {
+	public Teacher setExperience(int experience) {
 		this.experience = experience;
+		return this;
 	}
 
 	public String getLanguage() {
 		return language;
 	}
 
-	public void setLanguage(String language) {
+	public Teacher setLanguage(String language) {
 		this.language = language;
+		return this;
 	}
 
 	public User getUser() {
 		return this.user;
 	}
 
-	public void setUser(User user) {
+	public Teacher setUser(User user) {
 		this.user = user;
+		return this;
 	}
 
 	public int getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(int addressId) {
+	public Teacher setAddressId(int addressId) {
 		this.addressId = addressId;
+		return this;
 	}
 
 	@Override

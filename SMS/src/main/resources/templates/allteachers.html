@@ -34,19 +34,19 @@
                     <td th:text="${teacher.subject}"></td>
                     <td th:text="${teacher.experience+' Years'}"></td>
                     <td th:text="${teacher.language}"></td>
-                    <td th:hidden="${teacher.user.id}"></td>
+                    <td th:hidden="${teacher.id}"></td>
                     <td align="center">
-                        <a th:href="@{/task/edit/{id}(id=${teacher.user.id})}">
+                        <a th:href="@{/teacherDetails/{id}(id=${teacher.id})}">
                             <span class="glyphicon glyphicon-edit" data-toggle="tooltip"
                                   data-placement="top" title="Edit Task"></span></a>
                         &nbsp; &nbsp;
                         <a data-toggle="modal" data-target="#modal-toTrash"
-                           th:attr="data-target='#modal-toTrash'+${teacher.user.id}">
+                           th:attr="data-target='#modal-toTrash'+${teacher.id}">
                             <span class="glyphicon glyphicon-trash" data-toggle="tooltip"
                                   data-placement="top" title="Sent to Trash Box"></span></a>
                     </td>
                     <!--start send to trash modal-->
-                    <div class="modal modal-toTrash" th:id="modal-toTrash+${teacher.user.id}">
+                    <div class="modal modal-toTrash" th:id="modal-toTrash+${teacher.id}">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -63,7 +63,7 @@
                                     <button class="btn " data-dismiss="modal" aria-hidden="true">
                                         Cancel
                                     </button>
-                                    <a th:href="@{/task/trash/{id}(id=${teacher.user.id})}">
+                                    <a th:href="@{/task/trash/{id}(id=${teacher.id})}">
                                         <span class="btn btn-danger" value="delete">Delete</span></a>
 
                                 </div>
