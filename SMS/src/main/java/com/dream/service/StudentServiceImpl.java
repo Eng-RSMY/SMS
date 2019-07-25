@@ -35,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getAllTeachers() {
+	public List<Student> getAllStudents() {
 		List<Student> list = studentRepo.findAllStudents();
 		return list;
 	}
@@ -50,6 +50,10 @@ public class StudentServiceImpl implements StudentService {
 	@Override
 	public Page<Student> getPaginated(Pageable pageable) {
 		return studentRepo.findAll(pageable);
+	}
+
+	public List<Student> getParents() {
+		return studentRepo.findAllParents();
 	}
 
 }

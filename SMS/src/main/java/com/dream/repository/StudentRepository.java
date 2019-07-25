@@ -22,4 +22,7 @@ public interface StudentRepository extends PagingAndSortingRepository<Student, I
 	Student findByUserOn(@Param("id") int id);
 	
 	Student findById(int id);
+
+	@Query(value = "select u.name,u.last_name,t.phone,t.subject,t.experience from user u JOIN student t ON u.user_id=t.user_id and where user_id=:id", nativeQuery = true)
+	List<Student> findAllParents();
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dream.model.Student;
@@ -65,11 +66,11 @@ public class StudentController {
 		return "editStudent";
 	}
 	
-	@RequestMapping(value = "studentList", method = RequestMethod.GET)
-	public String getAllTeachers(Model model){
-		List<Student> list = studentService.get();
-		model.addAttribute("students", list);
-		return "allStudents";
+	@RequestMapping(value = "/studentList", method = RequestMethod.GET)
+	@ResponseBody
+	public List<Student> getAllStudents(Model model){
+		List<Student> list = studentService.getParents();
+		return list;
 	}
 	
 	@RequestMapping(value = "/allStudents", method = RequestMethod.GET)

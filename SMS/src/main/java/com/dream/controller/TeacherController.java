@@ -37,7 +37,7 @@ public class TeacherController {
 	}
 	
 	@RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
-	public String updateTeacher(@ModelAttribute Teacher reqTeacher, @ModelAttribute User reqUser) {
+	public String updateTeacher(@ModelAttribute Teacher reqTeacher, @ModelAttribute User reqUser, Model model) {
 		if(reqUser != null && reqTeacher != null) {
 			User actualUser = userService.findById(reqTeacher.getUser().getId());
 			System.out.println(actualUser.toString());
@@ -59,10 +59,12 @@ public class TeacherController {
 								.setPhone(reqTeacher.getPhone());
 				teacherService.insertTeacher(actualTeacher);
 				System.out.println("Teacher data Updated..!");
-				return "redirect:/allTeachers";
+				model.addAttribute("msg", "success");
+				return "editTeacher";
 			}
 		}
-		return "redirect:/allTeachers";
+		model.addAttribute("msg", "fail");
+		return "editTeacher";
 	}
 	
 	@RequestMapping(value = "/allTeachers", method = RequestMethod.GET)

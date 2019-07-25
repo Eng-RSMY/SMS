@@ -49,8 +49,9 @@ public class Student {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
-	@Column(name = "parent_id")
-	private int parentId;
+	@OneToOne
+	@JoinColumn(name = "parent_id")
+	private Parent parent;
 	
 	@Column(name = "address_id")
 	private int addressId;
@@ -131,12 +132,12 @@ public class Student {
 		return this;
 	}
 
-	public int getParentId() {
-		return parentId;
+	public Parent getParentId() {
+		return parent;
 	}
 
-	public Student setParentId(int parentId) {
-		this.parentId = parentId;
+	public Student setParentId(Parent parent) {
+		this.parent = parent;
 		return this;
 	}
 
