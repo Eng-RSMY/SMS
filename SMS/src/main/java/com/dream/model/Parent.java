@@ -1,6 +1,5 @@
 package com.dream.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,11 +19,14 @@ public class Parent {
 
 	@Column(name = "phone")
 	private String phone;
-	
+
 	@Column(name = "profession")
 	private String profession;
+	
+	@Column(name = "gender")
+	private String gender;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
@@ -42,6 +44,24 @@ public class Parent {
 
 	public void setProfession(String profession) {
 		this.profession = profession;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public User getUser() {
@@ -82,7 +102,7 @@ public class Parent {
 
 	@Override
 	public String toString() {
-		return "Parent [id=" + id + ", profession=" + profession + "]";
+		return "Parent [id=" + id + ", profession=" + profession + ", gender=" + gender + "]";
 	}
 
 }

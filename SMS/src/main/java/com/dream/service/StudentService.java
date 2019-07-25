@@ -20,7 +20,7 @@ public interface StudentService {
 	
 	public List<Student> getAllStudents();
 	
-	public List<Student> get();
+	public List<String> get(String st);
 	
 	public Page<Student> getPaginated(Pageable pageable);
 }

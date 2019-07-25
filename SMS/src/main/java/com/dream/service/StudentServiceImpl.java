@@ -2,6 +2,7 @@ package com.dream.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,10 +42,13 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> get() {
+	public List<String> get(String st) {
 		List<Student> list = new ArrayList<>();
 		studentRepo.findAll().forEach(l -> list.add(l));
-		return list;
+		List<String> lString = new ArrayList<String>();
+		list.forEach(l -> lString.add(l.getUser().getName()+" "+l.getUser().getLastName()));
+		lString.forEach(System.out::println);
+		return lString.stream().filter(s -> s.toLowerCase().contains(st.toLowerCase())).collect(Collectors.toList());
 	}
 
 	@Override
@@ -52,8 +56,7 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepo.findAll(pageable);
 	}
 
-	public List<Student> getParents() {
-		return studentRepo.findAllParents();
-	}
-
+	/*
+	 * public List<Student> getParents() { return studentRepo.findAllParents(); }
+	 */
 }

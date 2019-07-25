@@ -70,6 +70,7 @@ public class UserController {
 	public String studentRegistration() {
 		return "studentRegister";
 	}
+	
 	//It registers the Teacher.
 	@RequestMapping(value="/teacherRegister", method=RequestMethod.POST)
 	public String userRegistration(@ModelAttribute User reqUser,@ModelAttribute Teacher teacher,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){

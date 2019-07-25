@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Students</title>
+<title>Parents</title>
 <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
@@ -16,7 +16,6 @@
 					<thead>
 						<tr class="btn-info">
 							<th>Name</th>
-							<th>Student Name</th>
 							<th>Email</th>
 							<th>Phone</th>
 							<th>Profession</th>
@@ -30,19 +29,20 @@
 						<tr th:each="parent : ${page.content}">
 							<td th:text="${parent.user.name+' '+parent.user.lastName}"></td>
 							<td th:text="${parent.user.email}"></td>
-							<td th:text="${parent.user.email}"></td>
+							<td th:text="${parent.phone}"></td>
+							<td th:text="${parent.profession}"></td>
 							<td th:hidden="${parent.id}"></td>
 							<td align="center"><a
-								th:href="@{/studentDetails/{id}(id=${student.id})}"> <span
+								th:href="@{/parentDetails/{id}(id=${parent.id})}"> <span
 									class="glyphicon glyphicon-edit" data-toggle="tooltip"
 									data-placement="top" title="Edit Task"></span></a> &nbsp; &nbsp; <a
 								data-toggle="modal" data-target="#modal-toTrash"
-								th:attr="data-target='#modal-toTrash'+${student.id}"> <span
+								th:attr="data-target='#modal-toTrash'+${parent.id}"> <span
 									class="glyphicon glyphicon-trash" data-toggle="tooltip"
 									data-placement="top" title="Sent to Trash Box"></span></a></td>
 							<!--start send to trash modal-->
 							<div class="modal modal-toTrash"
-								th:id="modal-toTrash+${student.id}">
+								th:id="modal-toTrash+${parent.id}">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
@@ -58,7 +58,7 @@
 										<div class="modal-footer">
 											<button class="btn " data-dismiss="modal" aria-hidden="true">
 												Cancel</button>
-											<a th:href="@{/task/trash/{id}(id=${student.id})}">
+											<a th:href="@{/task/trash/{id}(id=${parent.id})}">
 												<span class="btn btn-danger" value="delete">Delete</span>
 											</a>
 
@@ -76,16 +76,16 @@
 				<!-- Pagination Starting-->
 				<div class="pagination-div">
 					<span th:if="${page.hasPrevious()}"> <a
-						th:href="@{/allStudents(page=${page.number-1},size=${page.size})}">Previous</a>
+						th:href="@{/allParents(page=${page.number-1},size=${page.size})}">Previous</a>
 					</span>
 					<th:block th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
 						<span th:if="${page.number == i}" class="selected">[[${i}+1]]</span>
 						<span th:unless="${page.number == i}"> <a
-							th:href="@{/allStudents(page=${i},size=${page.size})}">[[${i}+1]]</a>
+							th:href="@{/allParents(page=${i},size=${page.size})}">[[${i}+1]]</a>
 						</span>
 					</th:block>
 					<span th:if="${page.hasNext()}"> <a
-						th:href="@{/allStudents(page=${page.number+1},size=${page.size})}">Next</a>
+						th:href="@{/allParents(page=${page.number+1},size=${page.size})}">Next</a>
 					</span>
 				</div>
 				<!-- Pagination Ending -->
