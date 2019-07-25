@@ -4,14 +4,15 @@
   <title>Home</title>
   <meta charset="utf-8">
   <div th:replace="fragments/header :: header"></div>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
    <div th:replace="fragments/header :: header-nav"></div>
   <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-4"><a th:href="@{/allTeachers}"><span class="block">Teachers</span></a></div>
-    <div class="col-sm-4"><a th:href="@{/allParentslist}"><span class="block">Parents</span></a></div>
-    <div class="col-sm-4"><a th:href="@{/allStudents}"><span class="block">Students</span></a></div>
+    <div class="col-sm-4"><a th:href="@{/allTeachers}"><i class="fas fa-chalkboard-teacher fa-7x"></i><br>Teachers</a></div>
+    <div class="col-sm-4"><a th:href="@{/allParentslist}"><i class="fas fa-user-friends fa-7x"></i><br>Parents</a></div>
+    <div class="col-sm-4"><a th:href="@{/allStudents}"><i class="fas fa-user-graduate fa-7x"></i><br>Students</a></div>
   </div>
   </div>
 
