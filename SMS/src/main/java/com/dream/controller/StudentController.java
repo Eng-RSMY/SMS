@@ -80,4 +80,5 @@ public class StudentController {
 		System.out.println(page.getTotalElements());
 		return "allStudents";
 	}
+	
 }
