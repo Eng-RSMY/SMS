@@ -18,6 +18,7 @@ import com.dream.service.UserService;
 /**
  * 
  * @author dileep
+ * 
  * TeacherController created by Dileep on 15/07/2019
  */
 @Controller
@@ -29,6 +30,7 @@ public class TeacherController {
 	@Autowired
 	private UserService userService;
 	
+	// This method returns the edit page based on id.
 	@RequestMapping(value = "/teacherDetails/{id}", method = RequestMethod.GET)
 	public String getTeacherDetails(@PathVariable("id") int id, Model model) {
 		Teacher teacher = teacherService.getTeacherById(id);
@@ -36,6 +38,7 @@ public class TeacherController {
 		return "editTeacher";
 	}
 	
+	// This method updates the teacher.
 	@RequestMapping(value = "/editTeacher", method = RequestMethod.POST)
 	public String updateTeacher(@ModelAttribute Teacher reqTeacher, @ModelAttribute User reqUser, Model model) {
 		if(reqUser != null && reqTeacher != null) {
@@ -67,6 +70,7 @@ public class TeacherController {
 		return "editTeacher";
 	}
 	
+	// This method returns all Teachers.
 	@RequestMapping(value = "/allTeachers", method = RequestMethod.GET)
 	public String getAllTeachers(Model model){
 		List<Teacher> list = teacherService.get();

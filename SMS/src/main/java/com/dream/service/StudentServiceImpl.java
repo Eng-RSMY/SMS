@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.Student;
+import com.dream.model.User;
 import com.dream.repository.StudentRepository;
 /**
  * 
@@ -42,18 +43,23 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<String> get(String st) {
+	public List<Student> get(String st) {
 		List<Student> list = new ArrayList<>();
 		studentRepo.findAll().forEach(l -> list.add(l));
-		List<String> lString = new ArrayList<String>();
-		list.forEach(l -> lString.add(l.getUser().getName()+" "+l.getUser().getLastName()));
-		lString.forEach(System.out::println);
-		return lString.stream().filter(s -> s.toLowerCase().contains(st.toLowerCase())).collect(Collectors.toList());
+		List<Student> lNew = new ArrayList<>();
+		list.forEach(l -> lNew.add(l));
+		lNew.forEach(System.out::println);
+		return lNew.stream().filter(s -> s.getUser().getName().toLowerCase().contains(st.toLowerCase())).collect(Collectors.toList());
 	}
 
 	@Override
 	public Page<Student> getPaginated(Pageable pageable) {
 		return studentRepo.findAll(pageable);
+	}
+
+	@Override
+	public Student findByUser(User user) {
+		return studentRepo.findByUser(user);
 	}
 
 	/*

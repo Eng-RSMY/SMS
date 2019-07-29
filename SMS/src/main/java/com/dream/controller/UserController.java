@@ -83,8 +83,14 @@ public class UserController {
         }
 
         reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
-
-        if (userService.save(reqUser) != null) {
+        boolean flag = false;
+		 try {
+			 flag = userService.save(reqUser);
+		 }catch(Exception e) {
+			 redirectAttributes.addFlashAttribute("user", "exist");
+			 return "redirect:/parentRegister";
+		 }
+        if (flag) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
             	teacher.setUser(reqUser);
             	teacherService.insertTeacher(teacher);
@@ -102,8 +108,14 @@ public class UserController {
 	public String studentRegistration(@ModelAttribute User reqUser,@ModelAttribute Teacher teacher,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){
 		User user = userService.findByName(reqUser.getName());
         reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
-
-        if (userService.save(reqUser) != null) {
+        boolean flag = false;
+		 try {
+			 flag = userService.save(reqUser);
+		 }catch(Exception e) {
+			 redirectAttributes.addFlashAttribute("user", "exist");
+			 return "redirect:/parentRegister";
+		 }
+        if (flag) {
             redirectAttributes.addFlashAttribute("saveUser", "success");
             student.setUser(reqUser);
             studentService.insertStudent(student);
@@ -116,12 +128,7 @@ public class UserController {
         return "redirect:/studentRegister";
 	}
 	
-	@GetMapping("/secured/hello")
-	@ResponseBody
-	public String sercuredHello(){
-		return "Admin Login";
-	}
-	
+	//Home page Based on role
 	@GetMapping("/home")
 	public String message(Authentication auth, Model m){
 		User user = userService.findByName(auth.getName());
@@ -142,6 +149,7 @@ public class UserController {
 		return null;
 	}
 	
+	//List of Teachers.
 	@RequestMapping(value = "allTeacherslist", method = RequestMethod.GET)
 	public String getAllTeachersList(Model model) {
 		List<User> list = userService.findAll()

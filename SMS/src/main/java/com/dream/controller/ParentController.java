@@ -19,60 +19,82 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dream.model.Parent;
 import com.dream.model.Student;
-import com.dream.model.Teacher;
 import com.dream.model.User;
 import com.dream.service.ParentService;
 import com.dream.service.StudentService;
 import com.dream.service.UserService;
 import com.dream.utils.PassEncoding;
-
+/**
+ * 
+ * @author dileep
+ * 
+ *	ParentController is created on 25/07/2019.
+ */
 @Controller
 public class ParentController {
 
 	private static final Logger logger = LogManager.getLogger(ParentController.class);
-	
+
 	@Autowired
 	private ParentService parentService;
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private StudentService studentService;
-	
-	//Returns register page of Parent
+
+	// Returns register page of Parent
 	@GetMapping("/parentRegister")
 	public String parentRegistration() {
 		return "parentRegister";
 	}
-	//parent registration
-	@RequestMapping(value="/parentRegister", method=RequestMethod.POST)
-	public String userRegistration(@ModelAttribute User reqUser,@ModelAttribute Parent parent,@ModelAttribute Student student, final RedirectAttributes redirectAttributes){
-		User user = userService.findByName(reqUser.getName());
-        user = userService.findByEmail(reqUser.getEmail());
-        if (user != null) {
-            redirectAttributes.addFlashAttribute("saveUser", "exist-email");
-            logger.warn(user.getEmail() + " Alredy Exits..! ");
-            return "redirect:/parentRegister";
-        }
 
-        reqUser.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
+	// parent registration
+	@RequestMapping(value = "/parentRegister", method = RequestMethod.POST)
+	public String userRegistration(@ModelAttribute User reqUser, @ModelAttribute Parent parent,
+			final RedirectAttributes redirectAttributes) {
+		System.out.println("user : " + reqUser.getId());
+		User actualUser = new User();
+		actualUser.setEmail(reqUser.getEmail()).setLastName(reqUser.getLastName()).setName(reqUser.getName())
+				.setRole(reqUser.getRole())
+				.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
+		Student stu = studentService.findByUser(userService.findById(reqUser.getId()));
+		System.out.println("Student : "+stu);
+		
+		 if(stu.getParent().getId() > 0) { 
+			 redirectAttributes.addFlashAttribute("parent", "exist");
+			 logger.warn("That Student Already have one Parent");
+			 return "redirect:/parentRegister"; 
+		 }
+		 boolean flag = false;
+		 try {
+			 flag = userService.save(actualUser);
+		 }catch(Exception e) {
+			 redirectAttributes.addFlashAttribute("user", "exist");
+			 return "redirect:/parentRegister";
+		 }
+		 
+		if (flag) {
+			parent.setUser(actualUser);
+			parentService.save(parent);
+			User n = userService.findUserByFullName(reqUser.getName(), reqUser.getLastName());
+			System.out.println(n);
+			Parent p = parentService.findByUser(n);
+			System.out.println("Parent : "+p);
+			stu.setParent(p);
+			studentService.insertStudent(stu);
+			redirectAttributes.addFlashAttribute("saveUser", "success");
+			logger.info(reqUser.getName() + " Save Successfully..");
+		} else {
+			logger.warn(reqUser + " Not Save Successfully..");
+			redirectAttributes.addFlashAttribute("saveUser", "fail");
+		}
 
-        if (userService.save(reqUser) != null) {
-            redirectAttributes.addFlashAttribute("saveUser", "success");
-            	parent.setUser(reqUser);
-            	Student st = studentService.getStudentById(student.getId());
-            	st.setParent(parent);
-            	parentService.save(parent);
-            	studentService.insertStudent(st);
-            logger.info(reqUser.getName() + " Save Successfully..");
-        } else {
-        	logger.warn(user + " Not Save Successfully..");
-            redirectAttributes.addFlashAttribute("saveUser", "fail");
-        }
-
-        return "redirect:/parentRegister";
+		return "redirect:/parentRegister";
 	}
+
+	// This method returns the edit page based on id.
 	@RequestMapping(value = "/parentDetails/{id}", method = RequestMethod.GET)
 	public String getParentDetails(@PathVariable("id") int id, Model model) {
 		Parent Parent = parentService.getParentById(id);
@@ -81,39 +103,40 @@ public class ParentController {
 		return "editParent";
 	}
 	
+	//This method updates the Parent.
 	@RequestMapping(value = "/editParent", method = RequestMethod.POST)
-	public String updateParent(@ModelAttribute Parent reqParent, @ModelAttribute User reqUser,Model model) {
-		if(reqUser != null && reqParent != null) {
+	public String updateParent(@ModelAttribute Parent reqParent, @ModelAttribute User reqUser, Model model) {
+		if (reqUser != null && reqParent != null) {
 			User actualUser = userService.findById(reqParent.getUser().getId());
 			System.out.println(actualUser.toString());
-			if(actualUser != null) {
-				actualUser.setName(reqUser.getName())
-							.setLastName(reqUser.getLastName())
-							.setEmail(reqUser.getEmail());
+			if (actualUser != null) {
+				actualUser.setName(reqUser.getName()).setLastName(reqUser.getLastName()).setEmail(reqUser.getEmail());
 				userService.save(actualUser);
 				System.out.println("User data Updated..!");
 			}
 			Parent actualParent = parentService.getParentById(reqParent.getId());
 			System.out.println(actualParent.toString());
-			if(actualParent != null) {
-				actualParent.setProfession(reqParent.getProfession());
+			if (actualParent != null) {
+				actualParent.setProfession(reqParent.getProfession())
+							.setGender(reqParent.getGender())
+							.setPhone(reqParent.getPhone());
 				parentService.save(actualParent);
 				System.out.println("Parent data Updated..!");
-				model.addAttribute("msg", "success");
-				return "editParent";
+				return "redirect:/allParents";
 			}
 		}
-		model.addAttribute("msg", "fail");
-		return "editParent";
+		return "redirect:/allParents";
 	}
-	
+
+	//This method returns List of Parents
 	@RequestMapping(value = "/parentList", method = RequestMethod.GET)
-	public String getAllTeachers(Model model){
+	public String getAllTeachers(Model model) {
 		List<Parent> list = parentService.get();
 		model.addAttribute("parents", list);
 		return "allParents";
 	}
-	
+
+	//This method returns List of Parents in Pageable formate.
 	@RequestMapping(value = "/allParents", method = RequestMethod.GET)
 	public String getAllParents(@PageableDefault(size = 5) Pageable pageable, Model model) {
 		Page<Parent> page = parentService.getPaginated(pageable);

@@ -11,7 +11,7 @@ import com.dream.model.User;
  */
 public interface UserService {
 
-	public User save(User user);
+	public boolean save(User user);
 	
 	public Boolean delete(int id);
 	
@@ -25,4 +25,7 @@ public interface UserService {
 	
 	public List<User> findAll();
 	
+	public List<User> findAllUsers(String st);
+	
+	public User findUserByFullName(String name, String lastName);
 }

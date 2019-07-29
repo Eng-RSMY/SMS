@@ -1,13 +1,16 @@
 package com.dream.service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dream.model.Student;
 import com.dream.model.User;
 import com.dream.repository.UserRepository;
 
@@ -25,8 +28,12 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
-    public User save(User user) {
-        return userRepository.save(user);
+    public boolean save(User user) {
+        if(user != null) {
+        	userRepository.save(user);
+        	return true;
+        }
+    	return false;
     }
 
     public Boolean delete(int id) {
@@ -57,4 +64,18 @@ public class UserServiceImpl implements UserService{
         Iterable<User> itr = userRepository.findAll();
         return (List<User>) itr;
     }
+
+	@Override
+	public List<User> findAllUsers(String st) {
+		List<User> list = new ArrayList<>();
+		if(list.size() <= 0) {
+			userRepository.findAllUsers().forEach(l -> list.add(l));
+		}
+		list.forEach(System.out::println);
+		return list.stream().filter(s -> s.getName().toLowerCase().contains(st.toLowerCase())).collect(Collectors.toList());
+	}
+	
+	public User findUserByFullName(String name, String lastName) {
+		return userRepository.findByNameAndLastName(name, lastName);
+	}
 }

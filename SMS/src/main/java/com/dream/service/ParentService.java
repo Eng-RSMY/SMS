@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.dream.model.Parent;
+import com.dream.model.User;
 /**
  * 
  * @author dileep
@@ -17,6 +18,8 @@ public interface ParentService {
 	public boolean save(Parent student);
 
 	public Parent getParentById(int id);
+	
+	public Parent findByUser(User user);
 	
 	public List<Parent> get();
 	

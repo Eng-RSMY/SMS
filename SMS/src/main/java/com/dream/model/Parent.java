@@ -34,24 +34,27 @@ public class Parent {
 		return id;
 	}
 
-	public void setId(int id) {
+	public Parent setId(int id) {
 		this.id = id;
+		return this;
 	}
 
 	public String getProfession() {
 		return profession;
 	}
 
-	public void setProfession(String profession) {
+	public Parent setProfession(String profession) {
 		this.profession = profession;
+		return this;
 	}
 
 	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public Parent setPhone(String phone) {
 		this.phone = phone;
+		return this;
 	}
 	
 	
@@ -60,8 +63,9 @@ public class Parent {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public Parent setGender(String gender) {
 		this.gender = gender;
+		return this;
 	}
 
 	public User getUser() {

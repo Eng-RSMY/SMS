@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.Parent;
+import com.dream.model.User;
 import com.dream.repository.ParentRepository;
 
 @Service
@@ -47,6 +48,11 @@ public class ParentServiceImpl implements ParentService{
 	@Override
 	public Page<Parent> getPaginated(Pageable pageable) {
 		return parentRepo.findAll(pageable);
+	}
+
+	@Override
+	public Parent findByUser(User user) {
+		return parentRepo.findByUser(user);
 	}
 
 }

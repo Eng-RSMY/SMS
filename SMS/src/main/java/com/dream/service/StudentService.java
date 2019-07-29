@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.dream.model.Student;
+import com.dream.model.User;
 /**
  * 
  * @author dileep
@@ -20,7 +21,9 @@ public interface StudentService {
 	
 	public List<Student> getAllStudents();
 	
-	public List<String> get(String st);
+	public List<Student> get(String st);
 	
 	public Page<Student> getPaginated(Pageable pageable);
+	
+	public Student findByUser(User user);
 }
