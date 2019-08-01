@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,14 +24,14 @@ import com.dream.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-	private static final Logger logger = LogManager.getLogger(ParentController.class);
+	private static final Logger logger = LogManager.getLogger(StudentServiceImpl.class);
 	
 	@Autowired
 	private StudentRepository studentRepo;
 	
 	@Override
 	public boolean insertStudent(Student student) {
-		if(student != null{
+		if(student != null){
 			studentRepo.save(student);
 			logger.info("Student saved Successfully..!");
 			return true;
