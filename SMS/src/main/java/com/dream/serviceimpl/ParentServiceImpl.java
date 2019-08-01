@@ -1,4 +1,4 @@
-package com.dream.service;
+package com.dream.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.dream.model.Parent;
 import com.dream.model.User;
 import com.dream.repository.ParentRepository;
+import com.dream.service.ParentService;
 
 @Service
 public class ParentServiceImpl implements ParentService{

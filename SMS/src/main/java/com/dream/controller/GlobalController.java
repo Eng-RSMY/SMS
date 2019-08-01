@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.dream.model.User;
-import com.dream.service.UserServiceImpl;
+import com.dream.service.UserService;
 
 /**
  * The GlobalController Class
@@ -22,7 +22,7 @@ import com.dream.service.UserServiceImpl;
 public class GlobalController {
 
 	@Autowired
-	private UserServiceImpl userService;
+	private UserService userService;
 
 	private User loginUser;
 

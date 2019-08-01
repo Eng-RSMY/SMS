@@ -1,4 +1,4 @@
-package com.dream.service;
+package com.dream.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.Teacher;
-import com.dream.model.User;
 import com.dream.repository.TeacherRepository;
+import com.dream.service.TeacherService;
 
 /**
  * 

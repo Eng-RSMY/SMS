@@ -1,7 +1,5 @@
 package com.dream.model;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,12 +20,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "teacher")
-public class Teacher implements Serializable{
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Teacher{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

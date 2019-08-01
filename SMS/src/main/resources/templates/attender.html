@@ -9,17 +9,41 @@
 <body>
    <div th:replace="fragments/header :: header-nav"></div>
   <div class="container-fluid">
-  <div class="row">
+  <div class="row" id="first">
     <div class="col-sm-4"><a th:href="@{/allTeachers}"><i class="fas fa-chalkboard-teacher fa-7x"></i><br>Teachers</a></div>
     <div class="col-sm-4"><a th:href="@{/allParents}"><i class="fas fa-user-friends fa-7x"></i><br>Parents</a></div>
     <div class="col-sm-4"><a th:href="@{/allStudents}"><i class="fas fa-user-graduate fa-7x"></i><br>Students</a></div>
   </div><br>
+  <div class="row" id="second">
+  	<div class="col-sm-4"><a href="javascript:;" id="attendance"><i class="fas fa-calendar-alt fa-7x"></i><br>Attendance</a></div>
+  </div>
+  <div id="third">
+   <div class="row">
+    <div class="col-sm-4"><a th:href="@{/getStudents/1}"><i class="fas fa-book-reader fa-7x">1</i><br>1st Class</a></div>
+    <div class="col-sm-4"><a th:href="@{/getStudents/2}"><i class="fas fa-book-reader fa-7x">2</i><br>2nd Class</a></div>
+    <div class="col-sm-4"><a th:href="@{/getStudents/3}"><i class="fas fa-book-reader fa-7x">3</i><br>3rd Class</a></div>
+  </div>
   <div class="row">
-  	<div class="col-sm-4"><a th:href="@{/allStudents}"><i class="fas fa-calendar fa-7x"></i><br>Attendance</a></div>
+    <div class="col-sm-3"><a th:href="@{/getStudents/4}"><i class="fas fa-book-reader fa-7x">4</i><br>4th Class</a></div>
+    <div class="col-sm-3"><a th:href="@{/getStudents/5}"><i class="fas fa-book-reader fa-7x">5</i><br>5th Class</a></div>
+    <div class="col-sm-3"><a th:href="@{/getStudents/6}"><i class="fas fa-book-reader fa-7x">6</i><br>6th Class</a></div>
+    <div class="col-sm-3"><a th:href="@{/getStudents/7}"><i class="fas fa-book-reader fa-7x">7</i><br>7th Class</a></div>
+  </div>
   </div>
   </div>
 
-
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#first").show();
+	$("#third").hide();
+	$("#attendance").on('click', function() {
+		$("#first").hide();
+		$("#second").hide();
+		$("#third").show();
+	})
+	
+})
+</script>
  <footer>
     <div class="separator" th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
 </footer>

@@ -19,7 +19,7 @@ public interface StudentService {
 
 	public Student getStudentById(int id);
 	
-	public List<Student> getAllStudents();
+	public List<Student> getAllStudents(int classOfStudy);
 	
 	public List<Student> get(String st);
 	

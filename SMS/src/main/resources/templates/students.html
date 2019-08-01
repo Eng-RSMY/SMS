@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Attendance</title>
+<div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+	<div th:replace="fragments/header :: header-nav"></div>
+	<a th:href="@{/parentRegister}"><input type="submit" value="Add"
+		class="btn btn-success btn-custom" /></a>
+	<div class="row">
+		<div class="panel panel-info">
+			<div class="panel-body">
+				<table class="table table-bordered  table-striped table-responsive">
+				<col>
+				<colgroup span="4"></colgroup>
+					<thead>
+					<tr class="btn-info">
+						<td rowspan="4"></td>
+						<th colspan="4" th:text="${classOfStudy+' Class'}"></th>
+						<tr class="btn-info">
+							<th>Name</th>
+							<th>Student Id</th>
+							<th>Date Of Birth</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${#lists.isEmpty(students)}" class="btn-default">
+							<td colspan="5" align="center">No Record Yet!!!</td>
+						</tr>
+						<tr th:each="student : ${students}">
+							<td th:text="${student.user.name+' '+student.user.lastName}"></td>
+							<td th:text="${student.studentId}"></td>
+							<td th:text="${student.dob}"></td>
+							<td th:text="${student.user.email}"></td>
+							<td th:text="${student.section+' Section'}"></td>
+							<td th:hidden="${student.id}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</div>
+	<footer>
+		<div th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+	</footer>
+</body>
+</html>

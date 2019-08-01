@@ -1,7 +1,6 @@
-package com.dream.service;
+package com.dream.serviceimpl;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,9 +9,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dream.model.Student;
 import com.dream.model.User;
 import com.dream.repository.UserRepository;
+import com.dream.service.UserService;
 
 /**
  * The UserService class

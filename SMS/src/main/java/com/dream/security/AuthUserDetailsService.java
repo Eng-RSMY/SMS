@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.User;
-import com.dream.service.UserServiceImpl;
+import com.dream.service.UserService;
 
 /**
  * The AuthUserDetailsService class
@@ -29,7 +29,7 @@ public class AuthUserDetailsService implements UserDetailsService {
     private static final Logger logger = LoggerFactory.getLogger(AuthUserDetailsService.class);
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     private org.springframework.security.core.userdetails.User springUser;
 

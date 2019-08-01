@@ -24,6 +24,7 @@ import com.dream.service.ParentService;
 import com.dream.service.StudentService;
 import com.dream.service.UserService;
 import com.dream.utils.PassEncoding;
+import com.dream.utils.Roles;
 /**
  * 
  * @author dileep
@@ -58,7 +59,8 @@ public class ParentController {
 		User actualUser = new User();
 		actualUser.setEmail(reqUser.getEmail()).setLastName(reqUser.getLastName()).setName(reqUser.getName())
 				.setRole(reqUser.getRole())
-				.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()));
+				.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()))
+				.setRole(Roles.Parent.getValue());
 		Student stu = studentService.findByUser(userService.findById(reqUser.getId()));
 		System.out.println("Student : "+stu);
 		

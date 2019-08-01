@@ -20,7 +20,6 @@
 			},
 			minLength : 2,
 			select: function (event, ui) {
-				alert(JSON.stringify(ui.item.abbrev));
 				$('#studentId').val(ui.item.abbrev); 
 	            return true;
 	        }

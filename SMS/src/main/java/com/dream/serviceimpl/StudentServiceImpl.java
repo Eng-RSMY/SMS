@@ -1,4 +1,4 @@
-package com.dream.service;
+package com.dream.serviceimpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.dream.model.Student;
 import com.dream.model.User;
 import com.dream.repository.StudentRepository;
+import com.dream.service.StudentService;
 /**
  * 
  * @author dileep
@@ -37,8 +38,8 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public List<Student> getAllStudents() {
-		List<Student> list = studentRepo.findAllStudents();
+	public List<Student> getAllStudents(int classOfStudy){
+		List<Student> list = studentRepo.findByClassOfStudy(classOfStudy);
 		return list;
 	}
 
