@@ -3,6 +3,8 @@ package com.dream.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import com.dream.utils.Roles;
 @Controller
 public class UserController {
 
+	private static final Logger logger = LogManager.getLogger(UserController.class);
+	
 	@Autowired
 	private UserService userService;
 	

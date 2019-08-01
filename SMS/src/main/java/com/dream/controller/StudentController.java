@@ -81,7 +81,7 @@ public class StudentController {
 	@RequestMapping(value = "/studentDetails/{id}", method = RequestMethod.GET)
 	public String getStudentDetails(@PathVariable("id") int id, Model model) {
 		Student student = studentService.getStudentById(id);
-		System.out.println(student.toString());
+		logger.info(student.toString());
 		model.addAttribute("student", student);
 		return "editStudent";
 	}
@@ -91,19 +91,19 @@ public class StudentController {
 	public String updateStudent(@ModelAttribute Student reqStudent, @ModelAttribute User reqUser, Model model) {
 		if (reqUser != null && reqStudent != null) {
 			User actualUser = userService.findById(reqStudent.getUser().getId());
-			System.out.println(actualUser.toString());
+			logger.info(actualUser.toString());
 			if (actualUser != null) {
 				actualUser.setName(reqUser.getName()).setLastName(reqUser.getLastName()).setEmail(reqUser.getEmail());
 				userService.save(actualUser);
-				System.out.println("User data Updated..!");
+				logger.info("User data Updated..!");
 			}
 			Student actualStudent = studentService.getStudentById(reqStudent.getId());
-			System.out.println(actualStudent.toString());
+			logger.info(actualStudent.toString());
 			if (actualStudent != null) {
 				actualStudent.setDob(reqStudent.getDob()).setClassOfStudy(reqStudent.getClassOfStudy())
 						.setGender(reqStudent.getGender()).setSection(reqStudent.getSection());
 				studentService.insertStudent(actualStudent);
-				System.out.println("Student data Updated..!");
+				logger.info("Student data Updated..!");
 				model.addAttribute("msg", "success");
 				return "editStudent";
 			}
@@ -124,7 +124,7 @@ public class StudentController {
 	public String getAllStudents(@PageableDefault(size = 5) Pageable pageable, Model model) {
 		Page<Student> page = studentService.getPaginated(pageable);
 		model.addAttribute("page", page);
-		System.out.println(page.getTotalElements());
+		logger.info(page.getTotalElements());
 		return "allStudents";
 	}
 

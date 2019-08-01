@@ -49,7 +49,7 @@ public class MyAuthenticationSuccessHandler extends SimpleUrlAuthenticationSucce
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<String> users = new ArrayList<>();
         for (GrantedAuthority a : authorities) {
-            System.out.println("Authority: " + a.getAuthority());
+            logger.info("Authority: " + a.getAuthority());
             users.add(a.getAuthority());
             
         }

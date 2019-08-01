@@ -55,14 +55,14 @@ public class ParentController {
 	@RequestMapping(value = "/parentRegister", method = RequestMethod.POST)
 	public String userRegistration(@ModelAttribute User reqUser, @ModelAttribute Parent parent,
 			final RedirectAttributes redirectAttributes) {
-		System.out.println("user : " + reqUser.getId());
+		logger.info("user : " + reqUser.getId());
 		User actualUser = new User();
 		actualUser.setEmail(reqUser.getEmail()).setLastName(reqUser.getLastName()).setName(reqUser.getName())
 				.setRole(reqUser.getRole())
 				.setPassword(PassEncoding.getInstance().passwordEncoder.encode(reqUser.getPassword()))
 				.setRole(Roles.Parent.getValue());
 		Student stu = studentService.findByUser(userService.findById(reqUser.getId()));
-		System.out.println("Student : "+stu);
+		logger.info("Student : "+stu);
 		
 		 if(stu.getParent().getId() > 0) { 
 			 redirectAttributes.addFlashAttribute("parent", "exist");
@@ -100,7 +100,7 @@ public class ParentController {
 	@RequestMapping(value = "/parentDetails/{id}", method = RequestMethod.GET)
 	public String getParentDetails(@PathVariable("id") int id, Model model) {
 		Parent Parent = parentService.getParentById(id);
-		System.out.println(Parent.toString());
+		logger.info("Parent Info : "+Parent.toString());
 		model.addAttribute("Parent", Parent);
 		return "editParent";
 	}
@@ -110,20 +110,20 @@ public class ParentController {
 	public String updateParent(@ModelAttribute Parent reqParent, @ModelAttribute User reqUser, Model model) {
 		if (reqUser != null && reqParent != null) {
 			User actualUser = userService.findById(reqParent.getUser().getId());
-			System.out.println(actualUser.toString());
+			logger.info("User info : "+actualUser.toString());
 			if (actualUser != null) {
 				actualUser.setName(reqUser.getName()).setLastName(reqUser.getLastName()).setEmail(reqUser.getEmail());
 				userService.save(actualUser);
-				System.out.println("User data Updated..!");
+				logger.info("User data Updated..!");
 			}
 			Parent actualParent = parentService.getParentById(reqParent.getId());
-			System.out.println(actualParent.toString());
+			logger.info(actualParent.toString());
 			if (actualParent != null) {
 				actualParent.setProfession(reqParent.getProfession())
 							.setGender(reqParent.getGender())
 							.setPhone(reqParent.getPhone());
 				parentService.save(actualParent);
-				System.out.println("Parent data Updated..!");
+				logger.info("Parent data Updated..!");
 				return "redirect:/allParents";
 			}
 		}
@@ -143,7 +143,7 @@ public class ParentController {
 	public String getAllParents(@PageableDefault(size = 5) Pageable pageable, Model model) {
 		Page<Parent> page = parentService.getPaginated(pageable);
 		model.addAttribute("page", page);
-		System.out.println(page.getTotalElements());
+		logger.info(page.getTotalElements());
 		return "allParents";
 	}
 }

@@ -3,6 +3,8 @@ package com.dream.serviceimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +18,8 @@ import com.dream.service.ParentService;
 @Service
 public class ParentServiceImpl implements ParentService{
 
+	private static final Logger logger = LogManager.getLogger(ParentServiceImpl.class);
+	
 	@Autowired
 	private ParentRepository parentRepo;
 	
@@ -23,8 +27,10 @@ public class ParentServiceImpl implements ParentService{
 	public boolean save(Parent parent) {
 		if(parent != null) {
 			parentRepo.save(parent);
+			logger.info("Parent saved successfully...");
 			return true;
 		}
+		logger.info("Parent not saved successfully...");
 		return false;
 	}
 
