@@ -22,12 +22,18 @@ import com.dream.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService {
 
+	private static final Logger logger = LogManager.getLogger(ParentController.class);
+	
 	@Autowired
 	private StudentRepository studentRepo;
 	
 	@Override
 	public boolean insertStudent(Student student) {
-		studentRepo.save(student);
+		if(student != null{
+			studentRepo.save(student);
+			logger.info("Student saved Successfully..!");
+			return true;
+		}
 		return false;
 	}
 
