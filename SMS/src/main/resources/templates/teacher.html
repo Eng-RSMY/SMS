@@ -7,22 +7,36 @@
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-   <div th:replace="fragments/header :: header-nav"></div>
+  <div th:replace="fragments/header :: header-nav"></div>
   <div class="container-fluid">
-  <div id="third">
-   <div class="row">
-    <div class="col-sm-4"><a th:href="@{/getAllStudents/1}"><i class="fas fa-book-reader fa-7x">1</i><br>1st Class</a></div>
-    <div class="col-sm-4"><a th:href="@{/getAllStudents/2}"><i class="fas fa-book-reader fa-7x">2</i><br>2nd Class</a></div>
-    <div class="col-sm-4"><a th:href="@{/getAllStudents/3}"><i class="fas fa-book-reader fa-7x">3</i><br>3rd Class</a></div>
+	  <div class="row" id="first">
+	  	<div class="col-sm-4"><a href="javascript:;" id="students"><i class="fas fa-user-graduate fa-7x"></i><br>Students</a></div>
+	  </div>
+	  <div id="second">
+	   	<div class="row">
+		    <div class="col-sm-4"><a th:href="@{/getAllStudents/1}"><i class="fas fa-book-reader fa-7x">1</i><br>1st Class</a></div>
+		    <div class="col-sm-4"><a th:href="@{/getAllStudents/2}"><i class="fas fa-book-reader fa-7x">2</i><br>2nd Class</a></div>
+		    <div class="col-sm-4"><a th:href="@{/getAllStudents/3}"><i class="fas fa-book-reader fa-7x">3</i><br>3rd Class</a></div>
+	  	</div>
+	  	<div class="row">
+	    <div class="col-sm-3"><a th:href="@{/getAllStudents/4}"><i class="fas fa-book-reader fa-7x">4</i><br>4th Class</a></div>
+		    <div class="col-sm-3"><a th:href="@{/getAllStudents/5}"><i class="fas fa-book-reader fa-7x">5</i><br>5th Class</a></div>
+		    <div class="col-sm-3"><a th:href="@{/getAllStudents/6}"><i class="fas fa-book-reader fa-7x">6</i><br>6th Class</a></div>
+		    <div class="col-sm-3"><a th:href="@{/getAllStudents/7}"><i class="fas fa-book-reader fa-7x">7</i><br>7th Class</a></div>
+	  	</div>
+	  </div>
   </div>
-  <div class="row">
-    <div class="col-sm-3"><a th:href="@{/getAllStudents/4}"><i class="fas fa-book-reader fa-7x">4</i><br>4th Class</a></div>
-    <div class="col-sm-3"><a th:href="@{/getAllStudents/5}"><i class="fas fa-book-reader fa-7x">5</i><br>5th Class</a></div>
-    <div class="col-sm-3"><a th:href="@{/getAllStudents/6}"><i class="fas fa-book-reader fa-7x">6</i><br>6th Class</a></div>
-    <div class="col-sm-3"><a th:href="@{/getAllStudents/7}"><i class="fas fa-book-reader fa-7x">7</i><br>7th Class</a></div>
-  </div>
-  </div>
-  </div>
+  <script type="text/javascript">
+$(document).ready(function() {
+	$("#first").show();
+	$("#second").hide();
+	$("#students").on('click', function() {
+		$("#first").hide();
+		$("#second").show();
+	})
+	
+})
+</script>
  <footer>
     <div class="separator" th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
 </footer>

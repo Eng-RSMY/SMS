@@ -12,7 +12,9 @@ span.block{
 
 .user_icon{
     color: #05b3f7;
-    padding: 0px, 10px,10px.0px;
+    padding: 0px, 10px,10px,0px;
+    margin-top: 15px;
+    margin-right: 10px;
 }
 
 #footerSeparator {
@@ -46,7 +48,9 @@ span.block{
     color: rgb(180, 173, 173);
 }
 
-
+ul li form{
+	padding-left: 10px;
+}
 
 @media (max-width: 767px) {
 
