@@ -50,6 +50,7 @@ public class AuthUserDetailsService implements UserDetailsService {
                     accountNonLocked,
                     getAuthorities(user.getRole())
             );
+            System.out.println(user.getPassword());
             return springUser;
         } else {
             springUser = new org.springframework.security.core.userdetails.User("empty",

@@ -28,7 +28,7 @@
               <li><div class="dropdown"><span class="glyphicon glyphicon-user user_icon" data-toggle="dropdown"></span>
                 <ul class="dropdown-menu">
                 	<li><form th:action="@{/viewProfile}" method="post"><a href="javascript:;" onclick="$(this).closest('form').submit()"><span class="glyphicon glyphicon-eye-open"> ViewProfile</span></a></form></li>
-                  	<li><form th:action="@{/changePassword}" method="post"><a href="javascript:;" onclick="$(this).closest('form').submit()"><span class="glyphicon glyphicon-lock"> ChangePassword</span></a></form></li>
+                  	<li><form th:action="@{/changePassword}" method="get"><a href="javascript:;" onclick="$(this).closest('form').submit()"><span class="glyphicon glyphicon-lock"> ChangePassword</span></a></form></li>
                   	<li class="divider"></li>
                   	<li><form th:action="@{/logout}" method="post"><a href="javascript:;" onclick="$(this).closest('form').submit()"><span class="glyphicon glyphicon-off"> Logout</span></a></form></li>
                 </ul>

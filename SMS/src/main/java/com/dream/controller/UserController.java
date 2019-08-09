@@ -3,8 +3,6 @@ package com.dream.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -26,8 +24,6 @@ import com.dream.utils.Roles;
 @Controller
 public class UserController {
 
-	private static final Logger logger = LogManager.getLogger(UserController.class);
-	
 	@Autowired
 	private UserService userService;
 	
@@ -68,4 +64,27 @@ public class UserController {
 		model.addAttribute("userList", list);
 		return "allteachers";
 	}
+	
+	//password change
+	@GetMapping("/changePassword")
+	public String getChangePassword() {
+		return "changePassword"; 
+	}
+	
+	/*
+	 * @RequestMapping(value = "/changePasswordPost", method = RequestMethod.POST)
+	 * public String updatePassword(Authentication auth, @RequestParam("oldpwd")
+	 * String oldpwd, @RequestParam("newpwd") String newpwd, final
+	 * RedirectAttributes redirectAttributes) {
+	 * logger.info("@@ @@ changePasswordPost method is called....!"); User user =
+	 * userService.findByName(auth.getName()); logger.info(user); String
+	 * oldpwdEncode = PassEncoding.getInstance().passwordEncoder.encode(oldpwd);
+	 * String newpwdEncode =
+	 * PassEncoding.getInstance().passwordEncoder.encode(newpwd);
+	 * logger.info(auth.getPrincipal().toString());
+	 * if(user.getPassword().equals(oldpwdEncode)) { logger.info("@@@ matched....");
+	 * userService.save(user.setPassword(newpwdEncode)); return "redirect:/login"; }
+	 * redirectAttributes.addFlashAttribute("param", "error"); return
+	 * "/changePassword"; }
+	 */
 }
