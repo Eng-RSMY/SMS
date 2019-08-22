@@ -1,4 +1,4 @@
 FROM openjdk:8
-ADD target/sms-docker.jar sms-docker.jar
-EXPOSE 8020
-ENTRYPOINT ["java","-jar","sms-docker.jar"] 
+ADD target/sms-docker.war sms-docker.war
+EXPOSE 8010
+ENTRYPOINT ["java","-jar","sms-docker.war"] 
