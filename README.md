@@ -13,6 +13,6 @@ Step3: Add dump file in src/main/resource folder.
 
 Step4: Ruunig the application at https://localhost:8010/
 
-Step5: User is Dileep and pass is dileep.
+Step5: User is Dileep and pass is ******.
 
 Step6: Testing Clone.
