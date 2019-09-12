@@ -32,8 +32,12 @@ public class MainApp implements ApplicationRunner{
         logger.fatal("Fatal log");
 	}
 	
+
 	public void newBranch(){
 		System.out.println("New Branch");
+  }
+	public void masterBranch(){
+		system.out.println("master branch");
 	}
 	
 }
