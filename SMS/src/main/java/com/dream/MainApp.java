@@ -33,4 +33,7 @@ public class MainApp implements ApplicationRunner {
 		logger.fatal("Fatal log");
 	}
 
+	public void printF(){
+		System.out.println();
+	}
 }
