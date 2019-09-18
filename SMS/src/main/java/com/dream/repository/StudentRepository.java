@@ -27,4 +27,7 @@ public interface StudentRepository extends PagingAndSortingRepository<Student, I
 	List<Student> findByClassOfStudy(int classOfStudy);
 	
 	Student findByUser(User user);
+	
+	@Query(value = "select count(id) from student", nativeQuery = true)
+	Integer getCountOfId();
 }

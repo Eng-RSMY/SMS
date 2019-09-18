@@ -39,16 +39,21 @@ public class UserController {
 		User user = userService.findByName(auth.getName());
 		int user_type = user.getRole();
 		if(user_type == Roles.HM.getValue()) {
+			m.addAttribute("user_type", "HM");
 			return "hmhome";
 		}else if(user_type == Roles.Teacher.getValue()){
 			List<User> list = userService.findAll();
 			m.addAttribute("userList", list);
+			m.addAttribute("user_type", "Teacher");
 			return "teacher";
 		}else if(user_type == Roles.Attender.getValue()) {
+			m.addAttribute("user_type", "Attender");
 			return "attender";
 		}else if(user_type == Roles.Parent.getValue()){
+			m.addAttribute("user_type", "Parent");
 			return "parent";
 		}else if(user_type == Roles.Student.getValue()) {
+			m.addAttribute("user_type", "Student");
 			return "student";
 		}
 		return null;

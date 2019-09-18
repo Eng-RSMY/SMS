@@ -9,8 +9,9 @@
 <body>
   <div th:replace="fragments/header :: header-nav"></div>
   <div class="container-fluid">
-	  <div class="row" id="first">
-	  	<div class="col-sm-4"><a href="javascript:;" id="students"><i class="fas fa-user-graduate fa-7x"></i><br>Students</a></div>
+	  <div class="row" >
+	  	<div id="students" class="col-sm-4"><a href="javascript:;"><i class="fas fa-user-graduate fa-7x"></i><br>Students</a></div>
+	  	<div id="marksId" class="col-sm-4"><a href="javascript:;"><i class="far fa-file-alt fa-7x"></i><br>Marks</a></div>
 	  </div>
 	  <div id="second">
 	   	<div class="row">
@@ -25,14 +26,35 @@
 		    <div class="col-sm-3"><a th:href="@{/getAllStudents/7}"><i class="fas fa-book-reader fa-7x">7</i><br>7th Class</a></div>
 	  	</div>
 	  </div>
+	  <div id="marks">
+	   	<div class="row">
+		    <div class="col-sm-4"><a th:href="@{/getAllMarks/1}"><i class="far fa-file-alt fa-7x">1</i><br>1st Class</a></div>
+		    <div class="col-sm-4"><a th:href="@{/getAllMarks/2}"><i class="far fa-file-alt fa-7x">2</i><br>2nd Class</a></div>
+		    <div class="col-sm-4"><a th:href="@{/getAllMarks/3}"><i class="far fa-file-alt fa-7x">3</i><br>3rd Class</a></div>
+	  	</div>
+	  	<div class="row">
+	    <div class="col-sm-3"><a th:href="@{/getAllMarks/4}"><i class="far fa-file-alt fa-7x">4</i><br>4th Class</a></div>
+		    <div class="col-sm-3"><a th:href="@{/getAllMarks/5}"><i class="far fa-file-alt fa-7x">5</i><br>5th Class</a></div>
+		    <div class="col-sm-3"><a th:href="@{/getAllMarks/6}"><i class="far fa-file-alt fa-7x">6</i><br>6th Class</a></div>
+		    <div class="col-sm-3"><a th:href="@{/getAllMarks/7}"><i class="far fa-file-alt fa-7x">7</i><br>7th Class</a></div>
+	  	</div>
+	  </div>
   </div>
   <script type="text/javascript">
 $(document).ready(function() {
-	$("#first").show();
+	$("#students").show();
 	$("#second").hide();
+	$("#marks").hide();
 	$("#students").on('click', function() {
-		$("#first").hide();
+		$("#students").hide();
 		$("#second").show();
+		$("#marksId").hide();
+	})
+	$("#marksId").on('click', function() {
+		$("#students").hide();
+		$("#second").hide();
+		$("#marks").show();
+		$("#marksId").hide();
 	})
 	
 })

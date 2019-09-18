@@ -9,65 +9,57 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 /**
  * 
  * @author dileep
  *
- *	Student created by Dileep on 16/07/2019
+ *         Student created by Dileep on 16/07/2019
  */
 @Entity
 @Table(name = "student")
 public class Student {
 
-	@Transient
-	private int count = 1;
-	
-	@Transient
-	private final String school = "SSSS";
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name = "st_id")
+  
+	@Column(name="st_id")
 	private String studentId;
-	
+
 	@Column(name = "dob")
 	private String dob;
-	
+
 	@Column(name = "gender")
 	private String gender;
-	
+
 	@Column(name = "class")
 	private int classOfStudy;
-	
+
 	@Column(name = "section")
 	private String section;
-	
+
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "parent_id")
 	private Parent parent;
-	
+
+	@OneToOne(mappedBy = "stud")
+	private Marks marks;
+
 	@Column(name = "address_id")
 	private int addressId;
 
 	public Student() {
 		super();
-		this.studentId= school+this.count;
-		count++;
 	}
 
 	public Student(User user) {
 		super();
 		this.user = user;
-		this.studentId= school+this.count;
-		count++;
 	}
 
 	public int getId() {
@@ -151,6 +143,14 @@ public class Student {
 		return this;
 	}
 
+	public Marks getMarks() {
+		return marks;
+	}
+
+	public void setMarks(Marks marks) {
+		this.marks = marks;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -184,6 +184,5 @@ public class Student {
 		return "Student [studentId=" + studentId + ", gender=" + gender + ", classOfStudy=" + classOfStudy
 				+ ", section=" + section + ", addressId=" + addressId + "]";
 	}
-	
-	
+
 }

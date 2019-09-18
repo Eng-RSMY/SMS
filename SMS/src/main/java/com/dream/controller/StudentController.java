@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import com.dream.model.Student;
 import com.dream.model.Teacher;
 import com.dream.model.User;
 import com.dream.service.StudentService;
+import com.dream.service.TeacherService;
 import com.dream.service.UserService;
 import com.dream.utils.PassEncoding;
 import com.dream.utils.Roles;
@@ -44,6 +46,9 @@ public class StudentController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TeacherService teacherService;
 
 	// Returns register page of Students
 	@GetMapping("/studentRegister")
@@ -68,6 +73,7 @@ public class StudentController {
 		if (flag) {
 			redirectAttributes.addFlashAttribute("saveUser", "success");
 			student.setUser(reqUser);
+			student.setStudentId("SSSS"+studentService.getCount());
 			studentService.insertStudent(student);
 			logger.info(reqUser.getName() + " Save Successfully..");
 		} else {
@@ -150,4 +156,6 @@ public class StudentController {
 		return "students";
 
 	}
+	
+	
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dream.model.Teacher;
+import com.dream.model.User;
 import com.dream.repository.TeacherRepository;
 import com.dream.service.TeacherService;
 
@@ -14,14 +15,14 @@ import com.dream.service.TeacherService;
  * 
  * @author dileep
  *
- *	TeacherService created by Dileep on 15/07/2019
+ *         TeacherService created by Dileep on 15/07/2019
  */
 @Service
-public class TeacherServiceImpl implements TeacherService{
+public class TeacherServiceImpl implements TeacherService {
 
 	@Autowired
 	private TeacherRepository teacherRepo;
-	
+
 	@Override
 	public Teacher getTeacherById(int id) {
 		Teacher teacher = teacherRepo.findById(id);
@@ -35,7 +36,7 @@ public class TeacherServiceImpl implements TeacherService{
 	}
 
 	@Override
-	public List<Teacher> get(){
+	public List<Teacher> get() {
 		List<Teacher> list = new ArrayList<>();
 		teacherRepo.findAll().forEach(l -> list.add(l));
 		return list;
@@ -46,5 +47,10 @@ public class TeacherServiceImpl implements TeacherService{
 		teacherRepo.save(teacher);
 		return true;
 	}
-	
+
+	@Override
+	public Teacher getTeacherByUserId(User id) {
+		return teacherRepo.findByUser(id);
+	}
+
 }

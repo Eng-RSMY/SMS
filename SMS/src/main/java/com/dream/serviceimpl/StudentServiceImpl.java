@@ -71,6 +71,11 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepo.findByUser(user);
 	}
 
+	@Override
+	public int getCount() {
+		return studentRepo.getCountOfId()+1;
+	}
+	
 	/*
 	 * public List<Student> getParents() { return studentRepo.findAllParents(); }
 	 */

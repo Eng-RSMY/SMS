@@ -138,7 +138,7 @@ public class ParentController {
 		return "allParents";
 	}
 
-	//This method returns List of Parents in Pageable formate.
+	//This method returns List of Parents in Pageable format.
 	@RequestMapping(value = "/allParents", method = RequestMethod.GET)
 	public String getAllParents(@PageableDefault(size = 5) Pageable pageable, Model model) {
 		Page<Parent> page = parentService.getPaginated(pageable);

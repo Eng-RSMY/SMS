@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Edit Marks</title>
+  <meta charset="utf-8">
+  <div th:replace="fragments/header :: header"></div>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body>
+<div th:replace="fragments/header :: header-nav"></div>
+<div class="separator"></div>
+<div class="row">
+    <div class="container">
+<div class="col-sm-5"></div>
+<div class="col-sm-7 panel panel-info" style="right:250px">
+  <h2 class="panel-heading" >Edit Marks</h2>
+	<div th:if="${msg eq 'success'}" class="alert alert-success alert-dismissable">
+    	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      	<strong>Success </strong> Marks updated.
+    </div>
+    <div th:if="${msg eq 'fail'}" class="alert alert-danger alert-dismissable">
+         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+         <strong>Error !!!  </strong> Unexpected error occurred. Please try later.
+    </div>
+  <form class="form-horizontal panel-body" th:object="${student}" th:action="@{/editMarks}" method="post">
+  		<input type="hidden" th:field="*{id}" th:value="*{id}"/>
+  		<input type="hidden" th:field="*{user.id}" th:value="*{user.id}"/>
+  		<input type="hidden" th:field="*{classOfStudy}" th:value="*{classOfStudy}"/>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="username">User Name:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="name" placeholder="User Name" th:value="*{user.name+' '+user.lastName}" name="name" readonly="readonly">
+      </div>
+    </div>
+   <div class="form-group">
+      <label class="control-label col-sm-3" for="marks"><span th:text="${subject}"></span> Marks:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="marks" placeholder="Marks" th:value="${marks}" th:name="mark" >
+      </div>
+    </div>
+    <div class="form-group"> 
+    <div class="col-sm-6" style="position: absolute;right: 200px">       
+      <div class=" col-sm-3">
+        <button type="submit" class="btn btn-success">Update</button>
+      </div>
+       <div class=" col-sm-3">
+        <a th:href="@{/getAllMarks/{class}(class=${student.classOfStudy})}"><button type="button" class="btn btn-warning">Cancel</button></a>
+      </div>
+    </div>
+    </div>
+  </form>
+</div>
+</div>
+</div>
+ <footer>
+    <div class="separator" th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Marks</title>
+  <meta charset="utf-8">
+  <div th:replace="fragments/header :: header"></div>
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+</head>
+<body>
+	<div th:replace="fragments/header :: header-nav"></div>
+	<div class="container-fluid">
+	<div class="row">
+		<div class="panel panel-info">
+			<div class="panel-body">
+				<table class="table table-bordered  table-striped table-responsive">
+				<col>
+				<colgroup span="9"></colgroup>
+					<thead>
+					<tr class="btn-info">
+						<th colspan="9" th:text="${classOfStudy+' Class  /  '+subject}"></th>
+						<tr class="btn-info">
+							<th>Name</th>
+							<th>Student Id</th>
+							<th>Telugu</th>
+							<th>Hindi</th>
+							<th>English</th>
+							<th>Maths</th>
+							<th>Science</th>
+							<th>Social</th>
+							<th>Edit</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:if="${#lists.isEmpty(students)}" class="btn-default">
+							<td colspan="6" align="center">No Record Yet!!!</td>
+						</tr>
+						<tr th:each="student : ${students}">
+							<td th:text="${student.user.name+' '+student.user.lastName}"></td>
+							<td th:text="${student.studentId}"></td>
+							<td th:if="${student.marks!=null}" th:text="${student.marks.telugu}"/></td>
+							<td th:if="${student.marks!=null}" th:text="${student.marks.hindi}"/></td>
+							<td th:if="${student.marks!=null}" th:text="${student.marks.english}"/></td>
+							<td th:if="${student.marks!=null}" th:text="${student.marks.maths}"/></td>
+							<td th:if="${student.marks!=null}" th:text="${student.marks.science}"/></td>
+							<td th:if="${student.marks!=null}" th:text="${student.marks.social}"/></td>
+							<td th:if="${student.marks==null}"/></td>
+							<td th:if="${student.marks==null}"/></td>
+							<td th:if="${student.marks==null}"/></td>
+							<td th:if="${student.marks==null}"/></td>
+							<td th:if="${student.marks==null}"/></td>
+							<td th:if="${student.marks==null}"/></td>
+							<td th:hidden="${student.id}"></td><td th:hidden="${subject}"></td>
+							<td align="center"><a
+								th:href="@{/editMarks/{id}/(id=${student.id})}"> <span
+									class="glyphicon glyphicon-edit" data-toggle="tooltip"
+									data-placement="top" title="Edit"></span></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+
+	</div>
+	</div>
+	<footer>
+		<div th:replace="fragments/footer :: footer">&copy; 2016 pironix</div>
+	</footer>
+</body>
+</html>

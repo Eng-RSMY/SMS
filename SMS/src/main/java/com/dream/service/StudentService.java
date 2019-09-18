@@ -26,4 +26,6 @@ public interface StudentService {
 	public Page<Student> getPaginated(Pageable pageable);
 	
 	public Student findByUser(User user);
+
+	public int getCount();
 }

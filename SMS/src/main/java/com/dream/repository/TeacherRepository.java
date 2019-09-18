@@ -7,6 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import com.dream.model.Teacher;
+import com.dream.model.User;
 
 /**
  * 
@@ -24,4 +25,6 @@ public interface TeacherRepository extends CrudRepository<Teacher,Integer>{
 	Teacher findByUserOn(@Param("id") int id);
 	
 	Teacher findById(int id);
+	
+	Teacher findByUser(User u);
 }
